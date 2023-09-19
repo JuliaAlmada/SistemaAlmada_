@@ -28,7 +28,7 @@ public class JoaProduto  implements java.io.Serializable {
      private Double joaValorCompra;
      private Double joaValorVenda;
      private String joaCategoria;
-     private Set joaVendaProdutos = new HashSet(0);
+   
 
     public JoaProduto() {
     }
@@ -42,16 +42,7 @@ public class JoaProduto  implements java.io.Serializable {
         this.joaValorVenda = joaValorVenda;
         this.joaCategoria = joaCategoria;
     }
-    public JoaProduto(int idjoaProduto, String joaNome, String joaDescricao, Double joaValorCompra, Double joaValorVenda, String joaCategoria, Set joaVendaProdutos) {
-       this.idjoaProduto = idjoaProduto;
-       this.joaNome = joaNome;
-       this.joaDescricao = joaDescricao;
-       this.joaValorCompra = joaValorCompra;
-       this.joaValorVenda = joaValorVenda;
-       this.joaCategoria = joaCategoria;
-       this.joaVendaProdutos = joaVendaProdutos;
-    }
-   
+ 
      @Id 
 
     
@@ -112,15 +103,6 @@ public class JoaProduto  implements java.io.Serializable {
     
     public void setJoaCategoria(String joaCategoria) {
         this.joaCategoria = joaCategoria;
-    }
-
-@OneToMany(fetch=FetchType.LAZY, mappedBy="joaProduto")
-    public Set getJoaVendaProdutos() {
-        return this.joaVendaProdutos;
-    }
-    
-    public void setJoaVendaProdutos(Set joaVendaProdutos) {
-        this.joaVendaProdutos = joaVendaProdutos;
     }
 
 

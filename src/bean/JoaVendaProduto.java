@@ -25,12 +25,12 @@ public class JoaVendaProduto  implements java.io.Serializable {
      private JoaProduto joaProduto;
      private JoaVenda joaVenda;
      private String joaQuantidade;
-     private BigDecimal joaValorUnitario;
+     private Double joaValorUnitario;
 
     public JoaVendaProduto() {
     }
 
-    public JoaVendaProduto(int idjoaVendaProduto, JoaProduto joaProduto, JoaVenda joaVenda, String joaQuantidade, BigDecimal joaValorUnitario) {
+    public JoaVendaProduto(int idjoaVendaProduto, JoaProduto joaProduto, JoaVenda joaVenda, String joaQuantidade, Double joaValorUnitario) {
        this.idjoaVendaProduto = idjoaVendaProduto;
        this.joaProduto = joaProduto;
        this.joaVenda = joaVenda;
@@ -82,11 +82,11 @@ public class JoaVendaProduto  implements java.io.Serializable {
 
     
     @Column(name="joa_valorUnitario", nullable=false, precision=10)
-    public BigDecimal getJoaValorUnitario() {
+    public Double getJoaValorUnitario() {
         return this.joaValorUnitario;
     }
     
-    public void setJoaValorUnitario(BigDecimal joaValorUnitario) {
+    public void setJoaValorUnitario(Double joaValorUnitario) {
         this.joaValorUnitario = joaValorUnitario;
     }
 

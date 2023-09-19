@@ -17,13 +17,13 @@ import tools.Util;
  *
  * @author User
  */
-public class JDlgClientesNovo extends javax.swing.JDialog {
+public class JDlgClientes extends javax.swing.JDialog {
 
     /**
      * Creates new form JDlgCliente
      */
     MaskFormatter mascaraCPF, mascaraDataNascimento, mascaraCelular, mascaraTelefone, mascaraCep;
-    public JDlgClientesNovo(java.awt.Frame parent, boolean modal) {
+    public JDlgClientes(java.awt.Frame parent, boolean modal) {
         
         super(parent, modal);
         initComponents();
@@ -42,7 +42,7 @@ public class JDlgClientesNovo extends javax.swing.JDialog {
             mascaraTelefone = new MaskFormatter("(##)#####-####");
             mascaraCep = new MaskFormatter("#####-###");
         } catch (ParseException ex) {
-            Logger.getLogger(JDlgClientesNovo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JDlgClientes.class.getName()).log(Level.SEVERE, null, ex);
         }
         joa_jFmtCpf.setFormatterFactory(new DefaultFormatterFactory(mascaraCPF));
         joa_jFmtDataN.setFormatterFactory(new DefaultFormatterFactory(mascaraDataNascimento));
@@ -469,20 +469,21 @@ public class JDlgClientesNovo extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JDlgClientesNovo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JDlgClientesNovo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JDlgClientesNovo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JDlgClientesNovo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDlgClientesNovo dialog = new JDlgClientesNovo(new javax.swing.JFrame(), true);
+                JDlgClientes dialog = new JDlgClientes(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

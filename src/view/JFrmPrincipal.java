@@ -139,13 +139,13 @@ public class JFrmPrincipal extends javax.swing.JFrame {
 
     private void jMnuUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuUsuariosActionPerformed
         // TODO add your handling code here:
-        JDlgUsuariosNovo jDlgUsuariosNovo = new JDlgUsuariosNovo(null, true);
-        jDlgUsuariosNovo.setVisible(true);
+        JDlgUsuarios jDlgUsuarios = new JDlgUsuarios(null, true);
+        jDlgUsuarios.setVisible(true);
     }//GEN-LAST:event_jMnuUsuariosActionPerformed
 
     private void jMnuClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuClientesActionPerformed
         // TODO add your handling code here:
-        JDlgClientesNovo jDlgClienteNovo = new JDlgClientesNovo(null, true);
+        JDlgClientes jDlgClienteNovo = new JDlgClientes(null, true);
         jDlgClienteNovo.setVisible(true);
     }//GEN-LAST:event_jMnuClientesActionPerformed
 

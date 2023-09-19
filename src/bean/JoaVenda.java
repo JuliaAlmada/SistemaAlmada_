@@ -32,7 +32,7 @@ public class JoaVenda  implements java.io.Serializable {
      private JoaFuncionario joaFuncionario;
      private Date joaData;
      private Double joaTotal;
-     private Set joaVendaProdutos = new HashSet(0);
+
 
     public JoaVenda() {
     }
@@ -45,15 +45,7 @@ public class JoaVenda  implements java.io.Serializable {
         this.joaData = joaData;
         this.joaTotal = joaTotal;
     }
-    public JoaVenda(int idjoaVenda, JoaCliente joaCliente, JoaFuncionario joaFuncionario, Date joaData, Double joaTotal, Set joaVendaProdutos) {
-       this.idjoaVenda = idjoaVenda;
-       this.joaCliente = joaCliente;
-       this.joaFuncionario = joaFuncionario;
-       this.joaData = joaData;
-       this.joaTotal = joaTotal;
-       this.joaVendaProdutos = joaVendaProdutos;
-    }
-   
+
      @Id 
 
     
@@ -104,15 +96,6 @@ public class JoaVenda  implements java.io.Serializable {
     
     public void setJoaTotal(Double joaTotal) {
         this.joaTotal = joaTotal;
-    }
-
-@OneToMany(fetch=FetchType.LAZY, mappedBy="joaVenda")
-    public Set getJoaVendaProdutos() {
-        return this.joaVendaProdutos;
-    }
-    
-    public void setJoaVendaProdutos(Set joaVendaProdutos) {
-        this.joaVendaProdutos = joaVendaProdutos;
     }
 
 

@@ -43,14 +43,8 @@ public class JDlgInclusaoProduto_Vendas extends javax.swing.JDialog {
 
     }
 
-    /*public void limparCampos() {
-        jTxtQuantidade.setText("");
-        jCboProdutos.setSelectedIndex(-1);
-        jFmtUnitario.setText("");
-        jFmtTotal.setText("");
-    }
-
-    public Vendas_produtos viewBean() {
+   
+  /*  public Vendas_produtos viewBean() {
         Vendas_produtos vendas_produtos = new Vendas_produtos();
         double unitario = Double.parseDouble(jFmtUnitario.getText());
         vendas_produtos.setProduto(jCboProdutos.getSelectedIndex());

@@ -72,7 +72,7 @@ public class Util {
        }
        
        public static String Datestr (Date num){
-       return "";
+       return String.valueOf(num);
        }
        
 }

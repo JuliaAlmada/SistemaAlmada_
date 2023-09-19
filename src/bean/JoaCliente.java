@@ -36,7 +36,7 @@ public class JoaCliente  implements java.io.Serializable {
      private String joaPais;
      private String joaCep;
      private String joaCodigoDesconto;
-     private Set joaVendas = new HashSet(0);
+
 
     public JoaCliente() {
     }
@@ -55,24 +55,7 @@ public class JoaCliente  implements java.io.Serializable {
         this.joaPais = joaPais;
         this.joaCep = joaCep;
     }
-    public JoaCliente(int idjoaCliente, String joaNome, String joaEmail, String joaEmailReserva, String joaCpf, String joaDataNascimento, String joaSexo, String joaCelular, String joaTelefone, String joaEndereco, String joaBairro, String joaCidade, String joaPais, String joaCep, String joaCodigoDesconto, Set joaVendas) {
-       this.idjoaCliente = idjoaCliente;
-       this.joaNome = joaNome;
-       this.joaEmail = joaEmail;
-       this.joaEmailReserva = joaEmailReserva;
-       this.joaCpf = joaCpf;
-       this.joaDataNascimento = joaDataNascimento;
-       this.joaSexo = joaSexo;
-       this.joaCelular = joaCelular;
-       this.joaTelefone = joaTelefone;
-       this.joaEndereco = joaEndereco;
-       this.joaBairro = joaBairro;
-       this.joaCidade = joaCidade;
-       this.joaPais = joaPais;
-       this.joaCep = joaCep;
-       this.joaCodigoDesconto = joaCodigoDesconto;
-       this.joaVendas = joaVendas;
-    }
+   
    
      @Id 
 
@@ -226,14 +209,6 @@ public class JoaCliente  implements java.io.Serializable {
         this.joaCodigoDesconto = joaCodigoDesconto;
     }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="joaCliente")
-    public Set getJoaVendas() {
-        return this.joaVendas;
-    }
-    
-    public void setJoaVendas(Set joaVendas) {
-        this.joaVendas = joaVendas;
-    }
 
 
 
