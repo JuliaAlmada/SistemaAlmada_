@@ -6,7 +6,9 @@
 package view;
 
 import bean.JoaCliente;
+import dao.ClientesDAO;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.text.DefaultFormatterFactory;
@@ -22,17 +24,22 @@ public class JDlgClientes extends javax.swing.JDialog {
     /**
      * Creates new form JDlgCliente
      */
+    private boolean incluindo;
+    public  JoaCliente joaClientes;
+    public ClientesDAO clientesDAO;
+    
     MaskFormatter mascaraCPF, mascaraDataNascimento, mascaraCelular, mascaraTelefone, mascaraCep;
-    public JDlgClientes(java.awt.Frame parent, boolean modal) {
-        
-        super(parent, modal);
+   
+    public JDlgClientes(java.awt.Frame parent, boolean modal) { 
+       super(parent, modal);
         initComponents();
         Util.habilitar(false, joa_jTxtCodigo1, joa_jTxtNome,
                 joa_jTxtEmail, joa_jTxtEmailRes, joa_jTxtCidade, joa_jTxtBairro,
                 joa_jTxtPais, joa_jTxtEndereco, joa_jFmtCelular, joa_jFmtCep, joa_jFmtCpf,
                 joa_jFmtCartaoFidelidade, joa_jFmtDataN, joa_jFmtTelefone, joa_jCboSexo,
-                joa_jChbAtivo , joa_jBtnExcluir, joa_jBtnPesquisar,
+                joa_jChbAtivo , joa_jBtnExcluir,
                 joa_jBtnConfirmar, joa_jBtnCancelar);
+        clientesDAO = new ClientesDAO();
         setTitle("Cadastro de Clientes");
         setLocationRelativeTo(null);
          try {
@@ -49,8 +56,61 @@ public class JDlgClientes extends javax.swing.JDialog {
         joa_jFmtCelular.setFormatterFactory(new DefaultFormatterFactory(mascaraCelular));
         joa_jFmtTelefone.setFormatterFactory(new DefaultFormatterFactory(mascaraTelefone));
         joa_jFmtCep.setFormatterFactory(new DefaultFormatterFactory(mascaraCep));
+    }
+        public JoaCliente ViewBean() {
+        JoaCliente clientes = new JoaCliente();
+        
+        clientes.setIdjoaCliente(Util.strInt(joa_jTxtCodigo1.getText()));
+        clientes.setJoaDataNascimento(Util.strDate(joa_jFmtDataN.getText()));
 
-    
+        //transforma string para inteiro
+        clientes.setJoaNome(joa_jTxtNome.getText());
+        clientes.setJoaEmail(joa_jTxtEmail.getText());
+        clientes.setJoaCpf(joa_jFmtCpf.getText());
+        clientes.setJoaSexo(joa_jCboSexo.getSelectedIndex());
+        clientes.setJoaCelular(joa_jFmtCelular.getText());
+        clientes.setJoaEmailReserva(joa_jTxtEmailRes.getText());
+        clientes.setJoaEndereco(joa_jTxtEndereco.getText());
+        clientes.setJoaBairro(joa_jTxtBairro.getText());
+        clientes.setJoaCidade(joa_jTxtCidade.getText());
+        clientes.setJoaPais(joa_jTxtPais.getText());
+        clientes.setJoaCartaoFidelidade(joa_jFmtCartaoFidelidade.getText());
+        clientes.setJoaCep(joa_jFmtCep.getText());
+        clientes.setJoaTelefone(joa_jFmtTelefone.getText());
+        clientes.setJoaSexo(joa_jCboSexo.getSelectedIndex());
+
+       /* if (jChbAtivo.isSelected() == true) {
+            clientes.setAtivo("S");
+        } else {
+            clientes.setAtivo("N");
+        }*/
+        return clientes;
+    }
+
+    public void beanView(JoaCliente clientes) {
+        String id = String.valueOf(clientes.getIdjoaCliente());
+        //transforma inteiro para string
+        joa_jTxtCodigo1.setText(id);
+        joa_jFmtDataN.setText(Util.Datestr(clientes.getJoaDataNascimento()));
+        joa_jTxtNome.setText(clientes.getJoaNome());
+        joa_jTxtEmail.setText(clientes.getJoaEmail());
+        joa_jFmtCpf.setText(clientes.getJoaCpf());
+        joa_jCboSexo.setSelectedIndex(clientes.getJoaSexo());
+        joa_jFmtCelular.setText(clientes.getJoaCelular());
+        joa_jTxtEmailRes.setText(clientes.getJoaEmailReserva());
+        joa_jTxtEndereco.setText(clientes.getJoaEndereco());
+        joa_jTxtBairro.setText(clientes.getJoaBairro());
+        joa_jTxtCidade.setText(clientes.getJoaCidade());
+        joa_jTxtPais.setText(clientes.getJoaPais());
+        joa_jFmtCartaoFidelidade.setText(clientes.getJoaCartaoFidelidade());
+        joa_jFmtCep.setText(clientes.getJoaCep());
+        joa_jFmtTelefone.setText(clientes.getJoaTelefone());
+
+     /*   if (clientes.getAtivo().equals("S") == true) {
+            jChbAtivo.setSelected(true);
+        } else {
+            jChbAtivo.setSelected(false);
+        }*/
 
     }
 
@@ -357,7 +417,8 @@ public class JDlgClientes extends javax.swing.JDialog {
 
     private void joa_jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jBtnIncluirActionPerformed
         // TODO add your handling code here:
-        Util.limparCampos(joa_jTxtCodigo1,joa_jTxtNome,
+        
+        Util.limparCampos( joa_jTxtCodigo1,joa_jTxtNome,
                 joa_jTxtEmail, joa_jTxtEmailRes, joa_jTxtCidade, joa_jTxtBairro,
                 joa_jTxtPais, joa_jTxtEndereco, joa_jFmtCelular, joa_jFmtCep, joa_jFmtCpf,
                 joa_jFmtCartaoFidelidade, joa_jFmtDataN, joa_jFmtTelefone, joa_jCboSexo,
@@ -369,6 +430,7 @@ public class JDlgClientes extends javax.swing.JDialog {
                 joa_jFmtCartaoFidelidade, joa_jFmtDataN, joa_jFmtTelefone, joa_jCboSexo,
                 joa_jChbAtivo, joa_jBtnIncluir, joa_jBtnExcluir, joa_jBtnAlterar, joa_jBtnPesquisar,
                 joa_jBtnConfirmar, joa_jBtnCancelar);
+        incluindo = true;
     }//GEN-LAST:event_joa_jBtnIncluirActionPerformed
 
     private void joa_jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jBtnAlterarActionPerformed
@@ -384,6 +446,7 @@ public class JDlgClientes extends javax.swing.JDialog {
                 joa_jFmtCartaoFidelidade, joa_jFmtDataN, joa_jFmtTelefone, joa_jCboSexo,
                 joa_jChbAtivo, joa_jBtnIncluir, joa_jBtnExcluir, joa_jBtnAlterar, joa_jBtnPesquisar,
                 joa_jBtnConfirmar, joa_jBtnCancelar);
+        incluindo=false;
     }//GEN-LAST:event_joa_jBtnAlterarActionPerformed
 
     private void joa_jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jBtnExcluirActionPerformed
@@ -426,6 +489,13 @@ public class JDlgClientes extends javax.swing.JDialog {
     }//GEN-LAST:event_joa_jBtnPesquisarActionPerformed
 
     private void joa_jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jBtnConfirmarActionPerformed
+         joaClientes=ViewBean();
+        if (incluindo ==true ){
+        clientesDAO.insert(joaClientes);}
+        else{
+               clientesDAO.update(joaClientes);
+                }
+         
         Util.limparCampos(joa_jTxtCodigo1,joa_jTxtNome,
                 joa_jTxtEmail, joa_jTxtEmailRes, joa_jTxtCidade, joa_jTxtBairro,
                 joa_jTxtPais, joa_jTxtEndereco, joa_jFmtCelular, joa_jFmtCep, joa_jFmtCpf,

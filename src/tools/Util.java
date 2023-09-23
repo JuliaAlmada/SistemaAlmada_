@@ -5,6 +5,8 @@
  */
 package tools;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -44,11 +46,14 @@ public class Util {
             
        }
        public static boolean perguntar( String cadeia){
-          // int resp = JOptionPane.showConfirmDialog(null, "Deseja excluir registro?",
-         //  "Exclusão", JOptionPane.YES_NO_CANCEL_OPTION);
-           
-           JOptionPane.showConfirmDialog(null,cadeia , "Perguntar", JOptionPane.YES_NO_CANCEL_OPTION);
-           return false;
+      
+         int resp = JOptionPane.showConfirmDialog(null, cadeia,
+                "Perguntar", JOptionPane.YES_NO_OPTION);
+        if (resp == JOptionPane.YES_OPTION) {
+            return true;
+        } else {
+            return false;
+        }
        }
        
        public static int strInt (String cad){
@@ -68,11 +73,18 @@ public class Util {
        }
        
        public static Date strDate (String cad){
-       return null;
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            return formato.parse(cad);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
        }
        
-       public static String Datestr (Date num){
-       return String.valueOf(num);
+       public static String Datestr (Date date){
+         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        return formato.format(date);
        }
        
 }

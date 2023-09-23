@@ -5,6 +5,9 @@
  */
 package view;
 
+import bean.JoaFuncionario;
+import dao.FuncionarioDAO;
+import java.util.List;
 import tools.Util;
 
 /**
@@ -17,12 +20,21 @@ public class JDlgFuncionariosNovo extends javax.swing.JDialog {
     /**
      * Creates new form JDlgFuncionariosNovo
      */
+     FuncionariosControle funcionariosControle;
+     FuncionarioDAO funcionarioDAO;
+     JoaFuncionario joaFuncionario;
     public JDlgFuncionariosNovo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
        jDlgFuncionariosNovoIA = new JDlgFuncionariosNovoIA (null, true);
         setTitle("Cadastro de Funm");
         setLocationRelativeTo(null);
+        
+        funcionariosControle = new FuncionariosControle();
+        funcionarioDAO = new FuncionarioDAO();
+       // List lista = funcionarioDAO.listAll();
+       // funcionariosControle.setList(lista);
+       // jTable1.setModel(funcionariosControle);
     }
 
     /**
@@ -58,7 +70,7 @@ public class JDlgFuncionariosNovo extends javax.swing.JDialog {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jBtnIncluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/incluir.png"))); // NOI18N
+        jBtnIncluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/incluir_1.png"))); // NOI18N
         jBtnIncluir.setText("incluir");
         jBtnIncluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,7 +79,7 @@ public class JDlgFuncionariosNovo extends javax.swing.JDialog {
         });
         jPanel1.add(jBtnIncluir);
 
-        jBtnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/alterar_1.png"))); // NOI18N
+        jBtnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/alterar.png"))); // NOI18N
         jBtnAlterar.setText("alterar");
         jBtnAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,6 +119,10 @@ public class JDlgFuncionariosNovo extends javax.swing.JDialog {
         // TODO add your handling code here:
         jDlgFuncionariosNovoIA.setTitle("Inclusão");
         jDlgFuncionariosNovoIA.setVisible(true);
+        
+       List lista= funcionarioDAO.listAll();
+       funcionariosControle.setList(lista);
+       jTable1.setModel(funcionariosControle);
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
@@ -117,7 +133,15 @@ public class JDlgFuncionariosNovo extends javax.swing.JDialog {
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
         // TODO add your handling code here:
-        if (Util.perguntar("Deseja excluir o usuario?") == true) {
+       if (Util.perguntar("Deseja excluir o funcionario?") == true){
+           int sel = jTable1.getSelectedRow();
+           joaFuncionario = funcionariosControle.getBean(sel);
+           funcionarioDAO.delete(joaFuncionario);
+           //atulizar lista no jtable
+           List lista = funcionarioDAO.listAll();
+           funcionariosControle.setList(lista);
+        } else{
+           Util.mensagem("Exclusão cancelada");
         }
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 

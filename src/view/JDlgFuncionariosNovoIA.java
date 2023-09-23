@@ -5,20 +5,25 @@
  */
 package view;
 
+import bean.JoaFuncionario;
+import dao.FuncionarioDAO;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
+import tools.Util;
 
 /**
  *
  * @author User
  */
 public class JDlgFuncionariosNovoIA extends javax.swing.JDialog {
-    
-     MaskFormatter mascaraCPF, mascaraDataNascimento, mascaraCelular, mascaraTelefone, mascaraCep, mascaraCarteiraTrabalho;
-   
+
+    MaskFormatter mascaraCPF, mascaraDataNascimento, mascaraCelular, mascaraTelefone, mascaraCep, mascaraCarteiraTrabalho;
+    JoaFuncionario joafuncionario;
+    FuncionarioDAO funcionariosDAO;
 
     /**
      * Creates new form JDlgFuncionarios
@@ -26,7 +31,7 @@ public class JDlgFuncionariosNovoIA extends javax.swing.JDialog {
     public JDlgFuncionariosNovoIA(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-    
+        funcionariosDAO = new FuncionarioDAO();
         setTitle("Cadastro de Funcionários");
         setLocationRelativeTo(null);
         try {
@@ -39,12 +44,55 @@ public class JDlgFuncionariosNovoIA extends javax.swing.JDialog {
         } catch (ParseException ex) {
             Logger.getLogger(JDlgFuncionariosNovoIA.class.getName()).log(Level.SEVERE, null, ex);
         }
-        joa_jFmtCpf.setFormatterFactory( new DefaultFormatterFactory( mascaraCPF )); 
+        joa_jFmtCpf.setFormatterFactory(new DefaultFormatterFactory(mascaraCPF));
         joa_jFmtDataNascimento.setFormatterFactory(new DefaultFormatterFactory(mascaraDataNascimento));
-        joa_jFmtCarteiraTrabalho.setFormatterFactory( new DefaultFormatterFactory( mascaraCarteiraTrabalho )); 
-        joa_jFmtCelular.setFormatterFactory( new DefaultFormatterFactory( mascaraCelular )); 
-        joa_jFmtCep.setFormatterFactory( new DefaultFormatterFactory( mascaraCep )); 
-        joa_jFmtTelefone.setFormatterFactory( new DefaultFormatterFactory( mascaraTelefone )); 
+        joa_jFmtCarteiraTrabalho.setFormatterFactory(new DefaultFormatterFactory(mascaraCarteiraTrabalho));
+        joa_jFmtCep.setFormatterFactory(new DefaultFormatterFactory(mascaraCep));
+        joa_jFmtTelefone.setFormatterFactory(new DefaultFormatterFactory(mascaraTelefone));
+        joa_jFmtCelular.setFormatterFactory(new DefaultFormatterFactory(mascaraCelular));
+
+    }
+
+    public JoaFuncionario ViewBean() {
+        JoaFuncionario joafuncionario = new JoaFuncionario();
+        joafuncionario.setIdjoaFuncionario(Util.strInt(joa_jTxtCodigo.getText()));
+        joafuncionario.setJoaDataNascimento(Util.strDate(joa_jFmtDataNascimento.getText()));
+        //transforma para inteiro
+        joafuncionario.setJoaNome(joa_jTxtNome.getText());
+        joafuncionario.setJoaCpf(joa_jFmtCpf.getText());
+        joafuncionario.setJoaEmail(joa_jTxtEmail.getText());
+        joafuncionario.setJoaTelefone(joa_jFmtTelefone.getText());
+        joafuncionario.setJoaCelular(joa_jFmtCelular.getText());
+        joafuncionario.setJoaEmailReserva(joa_jTxtEmailReserva.getText());
+        joafuncionario.setJoaBairro(joa_jTxtBairro.getText());
+        joafuncionario.setJoaCidade(joa_jTxtCidade.getText());
+        joafuncionario.setJoaPais(joa_jTxtPais.getText());
+        joafuncionario.setJoaCep(joa_jFmtCep.getText());
+        joafuncionario.setJoaEndereco(joa_jTxtEndereco.getText());
+        joafuncionario.setJoaSexo(joa_jCboSexo.getSelectedIndex());
+        joafuncionario.setJoaCarteiraTrabalho(joa_jFmtCarteiraTrabalho.getText());
+      
+        return joafuncionario;
+    }
+
+    public void beanView(JoaFuncionario funcionarios) {
+        
+        //transforma inteiro para string
+        joa_jTxtCodigo.setText(Util.intStr(funcionarios.getIdjoaFuncionario()));;
+        joa_jTxtNome.setText(funcionarios.getJoaNome());
+        joa_jFmtCpf.setText(funcionarios.getJoaCpf());
+        joa_jTxtEmail.setText(funcionarios.getJoaEmail());
+        joa_jFmtTelefone.setText(funcionarios.getJoaTelefone());
+        joa_jFmtCelular.setText(funcionarios.getJoaCelular());
+        joa_jTxtEmailReserva.setText(funcionarios.getJoaEmailReserva());
+        joa_jFmtDataNascimento.setText(Util.Datestr(funcionarios.getJoaDataNascimento()));
+        joa_jTxtBairro.setText(funcionarios.getJoaBairro());
+        joa_jTxtCidade.setText(funcionarios.getJoaCidade());
+        joa_jTxtPais.setText(funcionarios.getJoaPais());
+        joa_jFmtCep.setText(funcionarios.getJoaCep());
+        joa_jTxtEndereco.setText(funcionarios.getJoaEndereco());
+        joa_jCboSexo.setSelectedIndex(funcionarios.getJoaSexo());
+        joa_jFmtCarteiraTrabalho.setText(funcionarios.getJoaCarteiraTrabalho());
     }
 
     /**
@@ -416,6 +464,10 @@ public class JDlgFuncionariosNovoIA extends javax.swing.JDialog {
     }//GEN-LAST:event_joa_jTxtEmailReservaActionPerformed
 
     private void joa_jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jBtnOkActionPerformed
+        joafuncionario = ViewBean();
+      
+        funcionariosDAO.insert(joafuncionario);
+
         setVisible(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_joa_jBtnOkActionPerformed

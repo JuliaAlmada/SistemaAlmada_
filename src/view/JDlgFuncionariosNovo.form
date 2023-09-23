@@ -73,7 +73,7 @@
         <Component class="javax.swing.JButton" name="jBtnIncluir">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/imagens/incluir.png"/>
+              <Image iconType="3" name="/imagens/incluir_1.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="incluir"/>
           </Properties>
@@ -84,7 +84,7 @@
         <Component class="javax.swing.JButton" name="jBtnAlterar">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/imagens/alterar_1.png"/>
+              <Image iconType="3" name="/imagens/alterar.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="alterar"/>
           </Properties>

@@ -1,15 +1,8 @@
 package bean;
-// Generated 16/09/2023 15:42:58 by Hibernate Tools 4.3.1
+// Generated 22/09/2023 22:28:12 by Hibernate Tools 4.3.1
 
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -131,6 +124,8 @@ public class JoaUsuario  implements java.io.Serializable {
     public void setJoaAtivo(String joaAtivo) {
         this.joaAtivo = joaAtivo;
     }
+
+
 
 
 }

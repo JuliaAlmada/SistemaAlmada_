@@ -5,11 +5,22 @@
  */
 package view;
 
+import bean.JoaProduto;
+import dao.ProdutoDAO;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
+import tools.Util;
+
 /**
  *
  * @author User
  */
 public class JDlgProdutoNovoIA extends javax.swing.JDialog {
+
+    MaskFormatter mascaraValorC, mascaraValorV;
 
     /**
      * Creates new form JDlgProdutoNovoIA
@@ -17,6 +28,39 @@ public class JDlgProdutoNovoIA extends javax.swing.JDialog {
     public JDlgProdutoNovoIA(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        Util.limparCampos(joa_jTxtCodigo1, joa_jTxtNome, joa_jTxtDescricao, joa_jFmtValorC, joa_jFmtValorV, joa_jCboCategoria);
+        setLocationRelativeTo(null);
+        setTitle("Cadastro de Produtos");
+        try {
+            mascaraValorC = new MaskFormatter("###.##");
+            mascaraValorV = new MaskFormatter("###.##");
+        } catch (ParseException ex) {
+            Logger.getLogger(JDlgProdutoNovoIA.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        joa_jFmtValorC.setFormatterFactory(new DefaultFormatterFactory(mascaraValorC));
+        joa_jFmtValorV.setFormatterFactory(new DefaultFormatterFactory(mascaraValorV));
+    }
+
+    public JoaProduto viewBean() {
+        JoaProduto joaProduto = new JoaProduto();
+        joaProduto.setIdjoaProduto(Util.strInt(joa_jTxtCodigo1.getText()));
+        joaProduto.setJoaNome(joa_jTxtNome.getText());
+        joaProduto.setJoaDescricao(joa_jTxtDescricao.getText());
+        joaProduto.setJoaValorCompra(Util.strDouble(joa_jFmtValorC.getText()));
+        joaProduto.setJoaValorVenda(Util.strDouble(joa_jFmtValorV.getText()));
+        joaProduto.setJoaCategoria(joa_jCboCategoria.getSelectedIndex());
+
+        return joaProduto;
+    }
+
+    public void beanView(JoaProduto joaProduto) { 
+        joa_jTxtCodigo1.setText(Util.intStr(joaProduto.getIdjoaProduto()));
+        joa_jFmtValorV.setText(Util.doubleStr(joaProduto.getJoaValorVenda()));
+        joa_jFmtValorC.setText(Util.doubleStr(joaProduto.getJoaValorCompra()));
+        joa_jTxtNome.setText(joaProduto.getJoaNome());
+        joa_jTxtDescricao.setText(joaProduto.getJoaDescricao());
+        joa_jCboCategoria.setSelectedIndex(joaProduto.getJoaCategoria());
+
     }
 
     /**
@@ -167,11 +211,20 @@ public class JDlgProdutoNovoIA extends javax.swing.JDialog {
 
     private void joa_jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jBtnOkActionPerformed
         setVisible(false);
+              JoaProduto produto = viewBean();
+
+        ProdutoDAO produtoDAO = new ProdutoDAO();
+
+        produtoDAO.insert(produto);
+
+       
+        Util.limparCampos();
         // TODO add your handling code here:
     }//GEN-LAST:event_joa_jBtnOkActionPerformed
 
     private void joa_jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jBtnCancelarActionPerformed
         setVisible(false);
+          Util.mensagem("Operação Cancelada!");
         // TODO add your handling code here:
     }//GEN-LAST:event_joa_jBtnCancelarActionPerformed
 

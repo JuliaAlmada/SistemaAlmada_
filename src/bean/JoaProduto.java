@@ -1,5 +1,5 @@
 package bean;
-// Generated 16/09/2023 15:42:58 by Hibernate Tools 4.3.1
+// Generated 22/09/2023 22:28:12 by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -25,16 +25,16 @@ public class JoaProduto  implements java.io.Serializable {
      private int idjoaProduto;
      private String joaNome;
      private String joaDescricao;
-     private Double joaValorCompra;
-     private Double joaValorVenda;
-     private String joaCategoria;
-   
+     private double joaValorCompra;
+     private double joaValorVenda;
+     private int joaCategoria;
+ 
 
     public JoaProduto() {
     }
 
 	
-    public JoaProduto(int idjoaProduto, String joaNome, String joaDescricao, Double joaValorCompra, Double joaValorVenda, String joaCategoria) {
+    public JoaProduto(int idjoaProduto, String joaNome, String joaDescricao, double joaValorCompra, double joaValorVenda, int joaCategoria) {
         this.idjoaProduto = idjoaProduto;
         this.joaNome = joaNome;
         this.joaDescricao = joaDescricao;
@@ -42,7 +42,7 @@ public class JoaProduto  implements java.io.Serializable {
         this.joaValorVenda = joaValorVenda;
         this.joaCategoria = joaCategoria;
     }
- 
+   
      @Id 
 
     
@@ -77,39 +77,35 @@ public class JoaProduto  implements java.io.Serializable {
 
     
     @Column(name="joa_valorCompra", nullable=false, precision=10)
-    public Double getJoaValorCompra() {
+    public double getJoaValorCompra() {
         return this.joaValorCompra;
     }
     
-    public void setJoaValorCompra(Double joaValorCompra) {
+    public void setJoaValorCompra(double joaValorCompra) {
         this.joaValorCompra = joaValorCompra;
     }
 
     
     @Column(name="joa_valorVenda", nullable=false, precision=10)
-    public Double getJoaValorVenda() {
+    public double getJoaValorVenda() {
         return this.joaValorVenda;
     }
     
-    public void setJoaValorVenda(Double joaValorVenda) {
+    public void setJoaValorVenda(double joaValorVenda) {
         this.joaValorVenda = joaValorVenda;
     }
 
     
-    @Column(name="joa_categoria", nullable=false, length=45)
-    public String getJoaCategoria() {
+    @Column(name="joa_categoria", nullable=false)
+    public int getJoaCategoria() {
         return this.joaCategoria;
     }
     
-    public void setJoaCategoria(String joaCategoria) {
+    public void setJoaCategoria(int joaCategoria) {
         this.joaCategoria = joaCategoria;
     }
 
 
-     @Override
-     public String toString() {
-        return getIdjoaProduto() + "-" + getJoaNome();
-    }
 
 }
 
