@@ -33,9 +33,15 @@ public class JDlgProdutoNovo extends javax.swing.JDialog {
        jDlgProdutoNovoIA = new JDlgProdutoNovoIA(null, true);
         produtoControle = new ProdutosControle();
         produtoDAO = new ProdutoDAO();
+<<<<<<< HEAD
         List lista = produtoDAO.listAll();
         produtoControle.setList(lista);
        jTable1.setModel(produtoControle);
+=======
+       // List lista = produtoDAO.listAll();
+        //produtoControle.setList(lista);
+       // jTable1.setModel(produtoControle);
+>>>>>>> 66002ac7362d381f5d40c25923c99ed5d59db325
     }
 
     /**

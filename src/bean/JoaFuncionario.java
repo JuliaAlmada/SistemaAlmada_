@@ -1,5 +1,9 @@
 package bean;
+<<<<<<< HEAD
 // Generated 22/09/2023 23:07:42 by Hibernate Tools 4.3.1
+=======
+// Generated 22/09/2023 22:28:12 by Hibernate Tools 4.3.1
+>>>>>>> 66002ac7362d381f5d40c25923c99ed5d59db325
 
 
 import java.util.Date;
@@ -39,13 +43,21 @@ public class JoaFuncionario  implements java.io.Serializable {
      private Date joaDataNascimento;
      private int joaSexo;
      private String joaCelular;
+<<<<<<< HEAD
 
+=======
+   
+>>>>>>> 66002ac7362d381f5d40c25923c99ed5d59db325
 
     public JoaFuncionario() {
     }
 
 	
+<<<<<<< HEAD
     public JoaFuncionario(int idjoaFuncionario, String joaNome, String joaEmail, String joaTelefone, String joaCpf, String joaEmailReserva, String joaEndereco, String joaBairro, String joaPais, String joaCidade, String joaCep, String joaCarteiraTrabalho, Date joaDataNascimento, int joaSexo) {
+=======
+    public JoaFuncionario(int idjoaFuncionario, String joaNome, String joaEmail, String joaTelefone, String joaCpf, String joaEmailReserva, String joaEndereco, String joaBairro, String joaPais, String joaCidade, String joaCep, String joaCarteiraTrabalho, Date joaDataNascimento, int joaSexo, String joaCelular) {
+>>>>>>> 66002ac7362d381f5d40c25923c99ed5d59db325
         this.idjoaFuncionario = idjoaFuncionario;
         this.joaNome = joaNome;
         this.joaEmail = joaEmail;
@@ -61,6 +73,7 @@ public class JoaFuncionario  implements java.io.Serializable {
         this.joaDataNascimento = joaDataNascimento;
         this.joaSexo = joaSexo;
         this.joaCelular = joaCelular;
+<<<<<<< HEAD
     }
     public JoaFuncionario(int idjoaFuncionario, String joaNome, String joaEmail, String joaTelefone, String joaCpf, String joaEmailReserva, String joaEndereco, String joaBairro, String joaPais, String joaCidade, String joaCep, String joaCarteiraTrabalho, Date joaDataNascimento, int joaSexo, String joaCelular, Set joaVendas) {
        this.idjoaFuncionario = idjoaFuncionario;
@@ -79,7 +92,10 @@ public class JoaFuncionario  implements java.io.Serializable {
        this.joaSexo = joaSexo;
        this.joaCelular = joaCelular;
  
+=======
+>>>>>>> 66002ac7362d381f5d40c25923c99ed5d59db325
     }
+  
    
      @Id 
 
@@ -232,6 +248,12 @@ public class JoaFuncionario  implements java.io.Serializable {
     public void setJoaCelular(String joaCelular) {
         this.joaCelular = joaCelular;
     }
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 66002ac7362d381f5d40c25923c99ed5d59db325
 
 
 }

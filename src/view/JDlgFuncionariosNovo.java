@@ -32,9 +32,15 @@ public class JDlgFuncionariosNovo extends javax.swing.JDialog {
         
         funcionariosControle = new FuncionariosControle();
         funcionarioDAO = new FuncionarioDAO();
+<<<<<<< HEAD
         List lista = funcionarioDAO.listAll();
        funcionariosControle.setList(lista);
        jTable1.setModel(funcionariosControle);
+=======
+       // List lista = funcionarioDAO.listAll();
+       // funcionariosControle.setList(lista);
+       // jTable1.setModel(funcionariosControle);
+>>>>>>> 66002ac7362d381f5d40c25923c99ed5d59db325
     }
 
     /**
