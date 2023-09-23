@@ -32,8 +32,8 @@ public class JDlgUsuarios extends javax.swing.JDialog {
      */
     private boolean incluindo;
     MaskFormatter mascaraCPF, mascaraDataNascimento;
-    UsuariosDAO usuariosDAO;
-
+    public UsuariosDAO usuariosDAO;
+    public JoaUsuario joausuarios;
     //variavel global declarada entre o construtor e a classe private boolean incluindo;
     //pode colocar em qualquer local menos no metodo
     //variável global é definida quando declaramos uma variável fora de qualquer função
@@ -43,9 +43,8 @@ public class JDlgUsuarios extends javax.swing.JDialog {
     public JDlgUsuarios(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        Util.habilitar(false, jTxtCodigo, jTxtNome, jTxtApelido, jFmtCpf, jFmtDataN, jPwfSenha, jCboNivel, jChbAtivo, jBtnCancelar, jBtnConfirmar);
-        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
-         UsuariosDAO usuariosDAO = new UsuariosDAO();
+        usuariosDAO = new UsuariosDAO();
+        Util.habilitar(false, joa_jTxtCodigo, joa_jTxtNome, joa_jTxtApelido, joa_jFmtCpf, joa_jFmtDataN, joa_jPwfSenha, joa_jCboNivel, joa_jChbAtivo, joa_jBtnCancelar, joa_jBtnConfirmar);
         setTitle("Cadastro de usuários");
         setLocationRelativeTo(null);
         try {
@@ -54,40 +53,23 @@ public class JDlgUsuarios extends javax.swing.JDialog {
         } catch (ParseException ex) {
             Logger.getLogger(JDlgUsuarios.class.getName()).log(Level.SEVERE, null, ex);
         }
-        jFmtCpf.setFormatterFactory(new DefaultFormatterFactory(mascaraCPF));
-        jFmtDataN.setFormatterFactory(new DefaultFormatterFactory(mascaraDataNascimento));
+        joa_jFmtCpf.setFormatterFactory(new DefaultFormatterFactory(mascaraCPF));
+        joa_jFmtDataN.setFormatterFactory(new DefaultFormatterFactory(mascaraDataNascimento));
 
     }
-
-   /* public void limparCampos() {
-        jTxtCodigo.setText("");
-        jTxtApelido.setText("");
-        jPwfSenha.setText("");
-        jTxtNome.setText("");
-        jFmtCpf.setText("");
-        jFmtDataN.setText("");
-        jCboNivel.setSelectedIndex(-1);
-        jChbAtivo.setSelected(false);;
-
-    }*/
-
+    
     public JoaUsuario viewBean() {
         JoaUsuario joausuarios = new JoaUsuario();
         
-       /*novo jeito de converter. Apartir do Util*/ joausuarios.setIdjoaUsuario(Util.strInt(jTxtCodigo.getText()));
-        
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        try {
-            joausuarios.setJoaDataNascimento(formato.parse(jFmtDataN.getText()));
-        } catch (ParseException ex) {
-            System.out.println("Erro, burro:" + ex.getMessage());
-        }
-        joausuarios.setJoaNome(jTxtNome.getText());
-        joausuarios.setJoaNickname(jTxtApelido.getText());
-        joausuarios.setJoaCpf(jFmtCpf.getText());       
-        joausuarios.setJoaSenha(jPwfSenha.getText());
-        joausuarios.setJoaNivel(jCboNivel.getSelectedIndex());
-        if (jChbAtivo.isSelected() == true) {
+       /*novo jeito de converter. Apartir do Util*/ 
+        joausuarios.setIdjoaUsuario(Util.strInt(joa_jTxtCodigo.getText()));
+        joausuarios.setJoaNome(joa_jTxtNome.getText());
+        joausuarios.setJoaNickname(joa_jTxtApelido.getText());
+        joausuarios.setJoaDataNascimento(Util.strDate(joa_jFmtDataN.getText()));
+        joausuarios.setJoaCpf(joa_jFmtCpf.getText());       
+        joausuarios.setJoaSenha(joa_jPwfSenha.getText());
+        joausuarios.setJoaNivel(joa_jCboNivel.getSelectedIndex());
+        if (joa_jChbAtivo.isSelected() == true) {
             joausuarios.setJoaAtivo("S");
         } else {
             joausuarios.setJoaAtivo("N");
@@ -97,20 +79,19 @@ public class JDlgUsuarios extends javax.swing.JDialog {
     }
 
     public void beanView(JoaUsuario joausuarios) {
-        String id = String.valueOf(joausuarios.getIdjoaUsuario());
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+     
+          joa_jTxtCodigo.setText(Util.intStr(joausuarios.getIdjoaUsuario()));
 
-        jFmtDataN.setText(formato.format(joausuarios.getJoaDataNascimento()));
-        jTxtCodigo.setText(id);
-        jTxtNome.setText(joausuarios.getJoaNome());
-        jTxtApelido.setText(joausuarios.getJoaNickname());
-        jFmtCpf.setText(joausuarios.getJoaCpf());
-        jPwfSenha.setText(joausuarios.getJoaSenha());
-        jCboNivel.setSelectedIndex(joausuarios.getJoaNivel());
+        joa_jFmtDataN.setText(Util.Datestr(joausuarios.getJoaDataNascimento()));
+        joa_jTxtNome.setText(joausuarios.getJoaNome());
+        joa_jTxtApelido.setText(joausuarios.getJoaNickname());
+        joa_jFmtCpf.setText(joausuarios.getJoaCpf());
+        joa_jPwfSenha.setText(joausuarios.getJoaSenha());
+        joa_jCboNivel.setSelectedIndex(joausuarios.getJoaNivel());
         if (joausuarios.getJoaAtivo().equals("S") == true) {
-            jChbAtivo.setSelected(true);
+            joa_jChbAtivo.setSelected(true);
         } else {
-            jChbAtivo.setSelected(false);
+            joa_jChbAtivo.setSelected(false);
         }
 
     }
@@ -126,26 +107,26 @@ public class JDlgUsuarios extends javax.swing.JDialog {
 
         jButton4 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jTxtCodigo = new javax.swing.JTextField();
+        joa_jTxtCodigo = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTxtNome = new javax.swing.JTextField();
+        joa_jTxtNome = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jFmtCpf = new javax.swing.JFormattedTextField();
+        joa_jFmtCpf = new javax.swing.JFormattedTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTxtApelido = new javax.swing.JTextField();
-        jFmtDataN = new javax.swing.JFormattedTextField();
+        joa_jTxtApelido = new javax.swing.JTextField();
+        joa_jFmtDataN = new javax.swing.JFormattedTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jPwfSenha = new javax.swing.JPasswordField();
+        joa_jPwfSenha = new javax.swing.JPasswordField();
         jLabel8 = new javax.swing.JLabel();
-        jChbAtivo = new javax.swing.JCheckBox();
-        jCboNivel = new javax.swing.JComboBox<>();
-        jBtnAlterar = new javax.swing.JButton();
-        jBtnIncluir = new javax.swing.JButton();
-        jBtnConfirmar = new javax.swing.JButton();
-        jBtnExcluir = new javax.swing.JButton();
-        jBtnCancelar = new javax.swing.JButton();
-        jBtnPesquisar = new javax.swing.JButton();
+        joa_jChbAtivo = new javax.swing.JCheckBox();
+        joa_jCboNivel = new javax.swing.JComboBox<>();
+        jao_jBtnAlterar = new javax.swing.JButton();
+        joa_jBtnIncluir = new javax.swing.JButton();
+        joa_jBtnConfirmar = new javax.swing.JButton();
+        joa_jBtnExcluir = new javax.swing.JButton();
+        joa_jBtnCancelar = new javax.swing.JButton();
+        joa_jBtnPesquisar = new javax.swing.JButton();
 
         jButton4.setText("jButton1");
 
@@ -153,54 +134,54 @@ public class JDlgUsuarios extends javax.swing.JDialog {
 
         jLabel1.setText("Código");
 
-        jTxtCodigo.addFocusListener(new java.awt.event.FocusAdapter() {
+        joa_jTxtCodigo.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jTxtCodigoFocusGained(evt);
+                joa_jTxtCodigoFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jTxtCodigoFocusLost(evt);
+                joa_jTxtCodigoFocusLost(evt);
             }
         });
 
         jLabel3.setText("Nome");
 
-        jTxtNome.addFocusListener(new java.awt.event.FocusAdapter() {
+        joa_jTxtNome.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jTxtNomeFocusGained(evt);
+                joa_jTxtNomeFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jTxtNomeFocusLost(evt);
+                joa_jTxtNomeFocusLost(evt);
             }
         });
 
         jLabel4.setText("CPF");
 
-        jFmtCpf.addFocusListener(new java.awt.event.FocusAdapter() {
+        joa_jFmtCpf.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jFmtCpfFocusGained(evt);
+                joa_jFmtCpfFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jFmtCpfFocusLost(evt);
+                joa_jFmtCpfFocusLost(evt);
             }
         });
 
         jLabel5.setText("Apelido");
 
-        jTxtApelido.addFocusListener(new java.awt.event.FocusAdapter() {
+        joa_jTxtApelido.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jTxtApelidoFocusGained(evt);
+                joa_jTxtApelidoFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jTxtApelidoFocusLost(evt);
+                joa_jTxtApelidoFocusLost(evt);
             }
         });
 
-        jFmtDataN.addFocusListener(new java.awt.event.FocusAdapter() {
+        joa_jFmtDataN.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jFmtDataNFocusGained(evt);
+                joa_jFmtDataNFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jFmtDataNFocusLost(evt);
+                joa_jFmtDataNFocusLost(evt);
             }
         });
 
@@ -208,84 +189,84 @@ public class JDlgUsuarios extends javax.swing.JDialog {
 
         jLabel7.setText("Senha");
 
-        jPwfSenha.addFocusListener(new java.awt.event.FocusAdapter() {
+        joa_jPwfSenha.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jPwfSenhaFocusGained(evt);
+                joa_jPwfSenhaFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jPwfSenhaFocusLost(evt);
+                joa_jPwfSenhaFocusLost(evt);
             }
         });
-        jPwfSenha.addActionListener(new java.awt.event.ActionListener() {
+        joa_jPwfSenha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPwfSenhaActionPerformed(evt);
+                joa_jPwfSenhaActionPerformed(evt);
             }
         });
 
         jLabel8.setText("Nível");
 
-        jChbAtivo.setText("Ativo");
-        jChbAtivo.addActionListener(new java.awt.event.ActionListener() {
+        joa_jChbAtivo.setText("Ativo");
+        joa_jChbAtivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jChbAtivoActionPerformed(evt);
+                joa_jChbAtivoActionPerformed(evt);
             }
         });
 
-        jCboNivel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Adiministrador", "usuario" }));
-        jCboNivel.addFocusListener(new java.awt.event.FocusAdapter() {
+        joa_jCboNivel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Adiministrador", "usuario" }));
+        joa_jCboNivel.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jCboNivelFocusGained(evt);
+                joa_jCboNivelFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jCboNivelFocusLost(evt);
+                joa_jCboNivelFocusLost(evt);
             }
         });
 
-        jBtnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/alterar.png"))); // NOI18N
-        jBtnAlterar.setText("Alterar");
-        jBtnAlterar.addActionListener(new java.awt.event.ActionListener() {
+        jao_jBtnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/alterar.png"))); // NOI18N
+        jao_jBtnAlterar.setText("Alterar");
+        jao_jBtnAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnAlterarActionPerformed(evt);
+                jao_jBtnAlterarActionPerformed(evt);
             }
         });
 
-        jBtnIncluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/incluir_1.png"))); // NOI18N
-        jBtnIncluir.setText("Incluir");
-        jBtnIncluir.addActionListener(new java.awt.event.ActionListener() {
+        joa_jBtnIncluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/incluir_1.png"))); // NOI18N
+        joa_jBtnIncluir.setText("Incluir");
+        joa_jBtnIncluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnIncluirActionPerformed(evt);
+                joa_jBtnIncluirActionPerformed(evt);
             }
         });
 
-        jBtnConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/gravar_1.png"))); // NOI18N
-        jBtnConfirmar.setText("Confirmar");
-        jBtnConfirmar.addActionListener(new java.awt.event.ActionListener() {
+        joa_jBtnConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/gravar_1.png"))); // NOI18N
+        joa_jBtnConfirmar.setText("Confirmar");
+        joa_jBtnConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnConfirmarActionPerformed(evt);
+                joa_jBtnConfirmarActionPerformed(evt);
             }
         });
 
-        jBtnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Excluir.png"))); // NOI18N
-        jBtnExcluir.setText("Excluir");
-        jBtnExcluir.addActionListener(new java.awt.event.ActionListener() {
+        joa_jBtnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Excluir.png"))); // NOI18N
+        joa_jBtnExcluir.setText("Excluir");
+        joa_jBtnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnExcluirActionPerformed(evt);
+                joa_jBtnExcluirActionPerformed(evt);
             }
         });
 
-        jBtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
-        jBtnCancelar.setText("Cancelar");
-        jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
+        joa_jBtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
+        joa_jBtnCancelar.setText("Cancelar");
+        joa_jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnCancelarActionPerformed(evt);
+                joa_jBtnCancelarActionPerformed(evt);
             }
         });
 
-        jBtnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisar_1.png"))); // NOI18N
-        jBtnPesquisar.setText("Pesquisar");
-        jBtnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+        joa_jBtnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisar_1.png"))); // NOI18N
+        joa_jBtnPesquisar.setText("Pesquisar");
+        joa_jBtnPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnPesquisarActionPerformed(evt);
+                joa_jBtnPesquisarActionPerformed(evt);
             }
         });
 
@@ -300,39 +281,39 @@ public class JDlgUsuarios extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jBtnIncluir)
+                                .addComponent(joa_jBtnIncluir)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jBtnAlterar)
+                                .addComponent(jao_jBtnAlterar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jBtnExcluir)
+                                .addComponent(joa_jBtnExcluir)
                                 .addGap(6, 6, 6)
-                                .addComponent(jBtnConfirmar)
+                                .addComponent(joa_jBtnConfirmar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jBtnCancelar)
+                                .addComponent(joa_jBtnCancelar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jBtnPesquisar)))
+                                .addComponent(joa_jBtnPesquisar)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addComponent(jLabel5)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jTxtCodigo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
-                                .addComponent(jTxtNome, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTxtApelido, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addComponent(joa_jTxtCodigo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                                .addComponent(joa_jTxtNome, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(joa_jTxtApelido, javax.swing.GroupLayout.Alignment.LEADING))
                             .addComponent(jLabel7)
-                            .addComponent(jPwfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(joa_jPwfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
-                            .addComponent(jFmtDataN, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(joa_jFmtDataN, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jCboNivel, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(joa_jCboNivel, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jChbAtivo))
+                                .addComponent(joa_jChbAtivo))
                             .addComponent(jLabel4)
-                            .addComponent(jFmtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(joa_jFmtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(170, 170, 170))))
         );
         layout.setVerticalGroup(
@@ -343,52 +324,52 @@ public class JDlgUsuarios extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTxtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(joa_jTxtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(11, 11, 11)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(joa_jTxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTxtApelido, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(joa_jTxtApelido, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jFmtDataN, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(joa_jFmtDataN, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCboNivel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jChbAtivo))))
+                            .addComponent(joa_jCboNivel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(joa_jChbAtivo))))
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jFmtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(joa_jFmtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPwfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(joa_jPwfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBtnIncluir)
-                    .addComponent(jBtnConfirmar)
-                    .addComponent(jBtnExcluir)
-                    .addComponent(jBtnCancelar)
-                    .addComponent(jBtnPesquisar)
-                    .addComponent(jBtnAlterar))
+                    .addComponent(joa_jBtnIncluir)
+                    .addComponent(joa_jBtnConfirmar)
+                    .addComponent(joa_jBtnExcluir)
+                    .addComponent(joa_jBtnCancelar)
+                    .addComponent(joa_jBtnPesquisar)
+                    .addComponent(jao_jBtnAlterar))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
+    private void joa_jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
-        JoaUsuario joausuarios = viewBean();
+        joausuarios = viewBean();
        // Usuarios_DAO usuarios_DAO = new Usuarios_DAO();
 
         if (incluindo == true) {
@@ -397,151 +378,134 @@ public class JDlgUsuarios extends javax.swing.JDialog {
             usuariosDAO.update(joausuarios);
         }
 
-       Util.limparCampos(jTxtCodigo, jTxtNome, jTxtApelido, jFmtCpf, jFmtDataN, jPwfSenha, jCboNivel, jChbAtivo);
-        
-    }//GEN-LAST:event_jBtnConfirmarActionPerformed
+       Util.limparCampos(joa_jTxtCodigo, joa_jTxtNome, joa_jTxtApelido, joa_jFmtCpf, joa_jFmtDataN, joa_jPwfSenha, joa_jCboNivel, joa_jChbAtivo);
+       Util.habilitar(true, joa_jTxtCodigo, joa_jTxtNome, joa_jTxtApelido, joa_jFmtCpf, joa_jFmtDataN, joa_jPwfSenha, joa_jCboNivel, joa_jChbAtivo, joa_jBtnCancelar, joa_jBtnConfirmar);
 
-    private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
+    }//GEN-LAST:event_joa_jBtnConfirmarActionPerformed
+
+    private void joa_jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jBtnIncluirActionPerformed
         // TODO add your handling code here:
         incluindo = true;
-       Util.habilitar(true, jTxtCodigo, jTxtNome, jTxtApelido, jFmtCpf, jFmtDataN, jPwfSenha, jCboNivel, jChbAtivo, jBtnCancelar, jBtnConfirmar);
-        Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
-        Util.limparCampos(jTxtCodigo, jTxtNome, jTxtApelido, jFmtCpf, jFmtDataN, jPwfSenha, jCboNivel, jChbAtivo);
+        Util.habilitar(true, joa_jTxtCodigo, joa_jTxtNome, joa_jTxtApelido, joa_jFmtCpf, joa_jFmtDataN, joa_jPwfSenha, joa_jCboNivel, joa_jChbAtivo, joa_jBtnCancelar, joa_jBtnConfirmar);
+        Util.habilitar(false, joa_jBtnIncluir, jao_jBtnAlterar, joa_jBtnExcluir, joa_jBtnPesquisar);
+        Util.limparCampos(joa_jTxtCodigo, joa_jTxtNome, joa_jTxtApelido, joa_jFmtCpf, joa_jFmtDataN, joa_jPwfSenha, joa_jCboNivel, joa_jChbAtivo);
 
-    }//GEN-LAST:event_jBtnIncluirActionPerformed
+    }//GEN-LAST:event_joa_jBtnIncluirActionPerformed
 
-    private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
+    private void jao_jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jao_jBtnAlterarActionPerformed
         // TODO add your handling code here:
              incluindo = false;
-    }//GEN-LAST:event_jBtnAlterarActionPerformed
+    }//GEN-LAST:event_jao_jBtnAlterarActionPerformed
 
-    private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
-        // TODO add your handling code here:
-       /* int resp = JOptionPane.showConfirmDialog(null, "Deseja excluir o registro?",
-                "Exclusão", JOptionPane.YES_NO_OPTION);
-
-        if (resp == JOptionPane.YES_OPTION) {
-            Usuarios usuarios = viewBean();
-            Usuarios_DAO usuarios_DAO = new Usuarios_DAO();
-            usuarios_DAO.delete(usuarios);
-        } else {
-        
-            Util.mensagem("Exclusão cancelada");
-        }*/
+    private void joa_jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jBtnExcluirActionPerformed
+   
        if (Util.perguntar("Deseja excluir o registro?") == true){
+           joausuarios=viewBean();
+           usuariosDAO.delete(joausuarios);
        }
        else {
         
             Util.mensagem("Exclusão cancelada");
         }
       
-        Util.limparCampos(jTxtCodigo, jTxtNome, jTxtApelido, jFmtCpf, jFmtDataN, jPwfSenha, jCboNivel, jChbAtivo);
+        Util.limparCampos(joa_jTxtCodigo, joa_jTxtNome, joa_jTxtApelido, joa_jFmtCpf, joa_jFmtDataN, joa_jPwfSenha, joa_jCboNivel, joa_jChbAtivo);
 
-    }//GEN-LAST:event_jBtnExcluirActionPerformed
+    }//GEN-LAST:event_joa_jBtnExcluirActionPerformed
 
-    private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
+    private void joa_jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jBtnCancelarActionPerformed
         // TODO add your handling code here:
   
         Util.mensagem("Operação cancelada");
-        Util.limparCampos(jTxtCodigo, jTxtNome, jTxtApelido, jFmtCpf, jFmtDataN, jPwfSenha, jCboNivel, jChbAtivo);
+        Util.limparCampos(joa_jTxtCodigo, joa_jTxtNome, joa_jTxtApelido, joa_jFmtCpf, joa_jFmtDataN, joa_jPwfSenha, joa_jCboNivel, joa_jChbAtivo);
 
-    }//GEN-LAST:event_jBtnCancelarActionPerformed
+    }//GEN-LAST:event_joa_jBtnCancelarActionPerformed
 
-    private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
-        // TODO add your handling code here:
-        /* String resp = JOptionPane.showInputDialog(null, "Entre com o código (PK)",
-                "Pesquisar", 2);
-        int id = Integer.parseInt(resp);
-        //transformou string em inteiro
-
-        Usuarios_DAO usuario_DAO = new Usuarios_DAO();
-        Usuarios usuarios = (Usuarios) usuario_DAO.list(id);
-        //retorna um bean e mostra na tela
-        beanView(usuarios);*/
+    private void joa_jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jBtnPesquisarActionPerformed
+ 
         JDlgUsuariosPesquisa jDlgUsuariosPesquisa = new JDlgUsuariosPesquisa(null, true);
         jDlgUsuariosPesquisa.setTelaAnterior(this);
         jDlgUsuariosPesquisa.setVisible(true);
         
-    }//GEN-LAST:event_jBtnPesquisarActionPerformed
+    }//GEN-LAST:event_joa_jBtnPesquisarActionPerformed
 
-    private void jTxtNomeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTxtNomeFocusGained
+    private void joa_jTxtNomeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_joa_jTxtNomeFocusGained
         // TODO add your handling code here:
-        jTxtNome.setBackground(Color.yellow);
+        joa_jTxtNome.setBackground(Color.yellow);
 
-    }//GEN-LAST:event_jTxtNomeFocusGained
+    }//GEN-LAST:event_joa_jTxtNomeFocusGained
 
-    private void jTxtNomeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTxtNomeFocusLost
+    private void joa_jTxtNomeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_joa_jTxtNomeFocusLost
         // TODO add your handling code here:
-        jTxtNome.setBackground(Color.white);
-    }//GEN-LAST:event_jTxtNomeFocusLost
+        joa_jTxtNome.setBackground(Color.white);
+    }//GEN-LAST:event_joa_jTxtNomeFocusLost
 
-    private void jTxtCodigoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTxtCodigoFocusGained
+    private void joa_jTxtCodigoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_joa_jTxtCodigoFocusGained
         // TODO add your handling code here:
-        jTxtCodigo.setBackground(Color.yellow);
-    }//GEN-LAST:event_jTxtCodigoFocusGained
+        joa_jTxtCodigo.setBackground(Color.yellow);
+    }//GEN-LAST:event_joa_jTxtCodigoFocusGained
 
-    private void jTxtCodigoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTxtCodigoFocusLost
+    private void joa_jTxtCodigoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_joa_jTxtCodigoFocusLost
         // TODO add your handling code here:
-        jTxtCodigo.setBackground(Color.white);
-    }//GEN-LAST:event_jTxtCodigoFocusLost
+        joa_jTxtCodigo.setBackground(Color.white);
+    }//GEN-LAST:event_joa_jTxtCodigoFocusLost
 
-    private void jTxtApelidoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTxtApelidoFocusGained
+    private void joa_jTxtApelidoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_joa_jTxtApelidoFocusGained
         // TODO add your handling code here:
-        jTxtApelido.setBackground(Color.yellow);
-    }//GEN-LAST:event_jTxtApelidoFocusGained
+        joa_jTxtApelido.setBackground(Color.yellow);
+    }//GEN-LAST:event_joa_jTxtApelidoFocusGained
 
-    private void jTxtApelidoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTxtApelidoFocusLost
+    private void joa_jTxtApelidoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_joa_jTxtApelidoFocusLost
         // TODO add your handling code here:
-        jTxtApelido.setBackground(Color.white);
-    }//GEN-LAST:event_jTxtApelidoFocusLost
+        joa_jTxtApelido.setBackground(Color.white);
+    }//GEN-LAST:event_joa_jTxtApelidoFocusLost
 
-    private void jFmtCpfFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFmtCpfFocusGained
+    private void joa_jFmtCpfFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_joa_jFmtCpfFocusGained
         // TODO add your handling code here:
-        jFmtCpf.setBackground(Color.yellow);
-    }//GEN-LAST:event_jFmtCpfFocusGained
+        joa_jFmtCpf.setBackground(Color.yellow);
+    }//GEN-LAST:event_joa_jFmtCpfFocusGained
 
-    private void jFmtCpfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFmtCpfFocusLost
+    private void joa_jFmtCpfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_joa_jFmtCpfFocusLost
         // TODO add your handling code here:
-        jFmtCpf.setBackground(Color.white);
-    }//GEN-LAST:event_jFmtCpfFocusLost
+        joa_jFmtCpf.setBackground(Color.white);
+    }//GEN-LAST:event_joa_jFmtCpfFocusLost
 
-    private void jFmtDataNFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFmtDataNFocusGained
+    private void joa_jFmtDataNFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_joa_jFmtDataNFocusGained
         // TODO add your handling code here:
-        jFmtDataN.setBackground(Color.yellow);
-    }//GEN-LAST:event_jFmtDataNFocusGained
+        joa_jFmtDataN.setBackground(Color.yellow);
+    }//GEN-LAST:event_joa_jFmtDataNFocusGained
 
-    private void jFmtDataNFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jFmtDataNFocusLost
+    private void joa_jFmtDataNFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_joa_jFmtDataNFocusLost
         // TODO add your handling code here:
-        jFmtDataN.setBackground(Color.white);
-    }//GEN-LAST:event_jFmtDataNFocusLost
+        joa_jFmtDataN.setBackground(Color.white);
+    }//GEN-LAST:event_joa_jFmtDataNFocusLost
 
-    private void jPwfSenhaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPwfSenhaFocusGained
+    private void joa_jPwfSenhaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_joa_jPwfSenhaFocusGained
         // TODO add your handling code here:
-        jPwfSenha.setBackground(Color.yellow);
-    }//GEN-LAST:event_jPwfSenhaFocusGained
+        joa_jPwfSenha.setBackground(Color.yellow);
+    }//GEN-LAST:event_joa_jPwfSenhaFocusGained
 
-    private void jPwfSenhaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPwfSenhaFocusLost
+    private void joa_jPwfSenhaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_joa_jPwfSenhaFocusLost
         // TODO add your handling code here:
-        jPwfSenha.setBackground(Color.white);
-    }//GEN-LAST:event_jPwfSenhaFocusLost
+        joa_jPwfSenha.setBackground(Color.white);
+    }//GEN-LAST:event_joa_jPwfSenhaFocusLost
 
-    private void jCboNivelFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCboNivelFocusGained
+    private void joa_jCboNivelFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_joa_jCboNivelFocusGained
         // TODO add your handling code here:
-        jCboNivel.setBackground(Color.yellow);
-    }//GEN-LAST:event_jCboNivelFocusGained
+        joa_jCboNivel.setBackground(Color.yellow);
+    }//GEN-LAST:event_joa_jCboNivelFocusGained
 
-    private void jCboNivelFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCboNivelFocusLost
+    private void joa_jCboNivelFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_joa_jCboNivelFocusLost
         // TODO add your handling code here:
-        jCboNivel.setBackground(Color.white);
-    }//GEN-LAST:event_jCboNivelFocusLost
+        joa_jCboNivel.setBackground(Color.white);
+    }//GEN-LAST:event_joa_jCboNivelFocusLost
 
-    private void jChbAtivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jChbAtivoActionPerformed
+    private void joa_jChbAtivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jChbAtivoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jChbAtivoActionPerformed
+    }//GEN-LAST:event_joa_jChbAtivoActionPerformed
 
-    private void jPwfSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPwfSenhaActionPerformed
+    private void joa_jPwfSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jPwfSenhaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPwfSenhaActionPerformed
+    }//GEN-LAST:event_joa_jPwfSenhaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -601,17 +565,7 @@ public class JDlgUsuarios extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBtnAlterar;
-    private javax.swing.JButton jBtnCancelar;
-    private javax.swing.JButton jBtnConfirmar;
-    private javax.swing.JButton jBtnExcluir;
-    private javax.swing.JButton jBtnIncluir;
-    private javax.swing.JButton jBtnPesquisar;
     private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jCboNivel;
-    private javax.swing.JCheckBox jChbAtivo;
-    private javax.swing.JFormattedTextField jFmtCpf;
-    private javax.swing.JFormattedTextField jFmtDataN;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -619,9 +573,19 @@ public class JDlgUsuarios extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JPasswordField jPwfSenha;
-    private javax.swing.JTextField jTxtApelido;
-    private javax.swing.JTextField jTxtCodigo;
-    private javax.swing.JTextField jTxtNome;
+    private javax.swing.JButton jao_jBtnAlterar;
+    private javax.swing.JButton joa_jBtnCancelar;
+    private javax.swing.JButton joa_jBtnConfirmar;
+    private javax.swing.JButton joa_jBtnExcluir;
+    private javax.swing.JButton joa_jBtnIncluir;
+    private javax.swing.JButton joa_jBtnPesquisar;
+    private javax.swing.JComboBox<String> joa_jCboNivel;
+    private javax.swing.JCheckBox joa_jChbAtivo;
+    private javax.swing.JFormattedTextField joa_jFmtCpf;
+    private javax.swing.JFormattedTextField joa_jFmtDataN;
+    private javax.swing.JPasswordField joa_jPwfSenha;
+    private javax.swing.JTextField joa_jTxtApelido;
+    private javax.swing.JTextField joa_jTxtCodigo;
+    private javax.swing.JTextField joa_jTxtNome;
     // End of variables declaration//GEN-END:variables
 }

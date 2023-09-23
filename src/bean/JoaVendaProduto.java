@@ -1,5 +1,5 @@
 package bean;
-// Generated 16/09/2023 15:42:58 by Hibernate Tools 4.3.1
+// Generated 22/09/2023 23:07:42 by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -25,12 +25,12 @@ public class JoaVendaProduto  implements java.io.Serializable {
      private JoaProduto joaProduto;
      private JoaVenda joaVenda;
      private String joaQuantidade;
-     private Double joaValorUnitario;
+     private double joaValorUnitario;
 
     public JoaVendaProduto() {
     }
 
-    public JoaVendaProduto(int idjoaVendaProduto, JoaProduto joaProduto, JoaVenda joaVenda, String joaQuantidade, Double joaValorUnitario) {
+    public JoaVendaProduto(int idjoaVendaProduto, JoaProduto joaProduto, JoaVenda joaVenda, String joaQuantidade, double joaValorUnitario) {
        this.idjoaVendaProduto = idjoaVendaProduto;
        this.joaProduto = joaProduto;
        this.joaVenda = joaVenda;
@@ -82,11 +82,11 @@ public class JoaVendaProduto  implements java.io.Serializable {
 
     
     @Column(name="joa_valorUnitario", nullable=false, precision=10)
-    public Double getJoaValorUnitario() {
+    public double getJoaValorUnitario() {
         return this.joaValorUnitario;
     }
     
-    public void setJoaValorUnitario(Double joaValorUnitario) {
+    public void setJoaValorUnitario(double joaValorUnitario) {
         this.joaValorUnitario = joaValorUnitario;
     }
 

@@ -42,14 +42,17 @@ Contributor(s):
 <hibernate-configuration>
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/db_juliaalmada?zeroDateTimeBehavior=convertToNull</property>
+     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/db_juliaalmada?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password"></property>
+    <!--<property name="hibernate.connection.url">jdbc:mysql://10.7.0.51:33062/db_julia_almada?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.username">julia_almada</property>
+    <property name="hibernate.connection.password">julia_almada</property>-->
+    <mapping class="bean.JoaProduto"/>
     <mapping class="bean.JoaCliente"/>
     <mapping class="bean.JoaVenda"/>
-    <mapping class="bean.JoaProduto"/>
-    <mapping class="bean.JoaUsuario"/>
     <mapping class="bean.JoaFuncionario"/>
+    <mapping class="bean.JoaUsuario"/>
     <mapping class="bean.JoaVendaProduto"/>
   </session-factory>
 </hibernate-configuration>
