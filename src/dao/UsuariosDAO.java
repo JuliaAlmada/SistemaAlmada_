@@ -73,9 +73,9 @@ public class UsuariosDAO extends DAO_Abstract {
 
     JoaUsuario usuarios = null;
 
-        String url = "jdbc:mysql://127.0.0.1:3306/db_juliaalmada"; //"jdbc:mysql://10.7.51:33062/db_julia_almada";
-        String user = "root"; //"julia_almada";
-        String password = ""; //"julia_almada";
+        String url = /*"jdbc:mysql://127.0.0.1:3306/db_juliaalmada"; */ "jdbc:mysql://10.7.51:33062/db_julia_almada";
+        String user =/* "root";*/  "julia_almada";
+        String password = /*""; */ "julia_almada";
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
