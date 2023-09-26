@@ -1,9 +1,5 @@
 package bean;
-<<<<<<< HEAD
 // Generated 22/09/2023 23:07:42 by Hibernate Tools 4.3.1
-=======
-// Generated 22/09/2023 22:28:12 by Hibernate Tools 4.3.1
->>>>>>> 66002ac7362d381f5d40c25923c99ed5d59db325
 
 
 import java.util.Date;
@@ -43,10 +39,7 @@ public class JoaCliente  implements java.io.Serializable {
      private String joaPais;
      private String joaCep;
      private String joaCartaoFidelidade;
-<<<<<<< HEAD
-=======
-
->>>>>>> 66002ac7362d381f5d40c25923c99ed5d59db325
+     private String joaAtivo;
 
     public JoaCliente() {
     }
@@ -65,7 +58,7 @@ public class JoaCliente  implements java.io.Serializable {
         this.joaPais = joaPais;
         this.joaCep = joaCep;
     }
-    public JoaCliente(int idjoaCliente, String joaNome, String joaEmail, String joaEmailReserva, String joaCpf, Date joaDataNascimento, int joaSexo, String joaCelular, String joaTelefone, String joaEndereco, String joaBairro, String joaCidade, String joaPais, String joaCep, String joaCartaoFidelidade) {
+    public JoaCliente(int idjoaCliente, String joaNome, String joaEmail, String joaEmailReserva, String joaCpf, Date joaDataNascimento, int joaSexo, String joaCelular, String joaTelefone, String joaEndereco, String joaBairro, String joaCidade, String joaPais, String joaCep, String joaCartaoFidelidade,String joaAtivo) {
        this.idjoaCliente = idjoaCliente;
        this.joaNome = joaNome;
        this.joaEmail = joaEmail;
@@ -81,10 +74,7 @@ public class JoaCliente  implements java.io.Serializable {
        this.joaPais = joaPais;
        this.joaCep = joaCep;
        this.joaCartaoFidelidade = joaCartaoFidelidade;
-<<<<<<< HEAD
-=======
-    
->>>>>>> 66002ac7362d381f5d40c25923c99ed5d59db325
+       this.joaAtivo = joaAtivo;
     }
    
      @Id 
@@ -239,8 +229,16 @@ public class JoaCliente  implements java.io.Serializable {
         this.joaCartaoFidelidade = joaCartaoFidelidade;
     }
 
+    @Column(name="joa_ativo", length=1)
+    public String getJoaAtivo() {
+        return this.joaAtivo;
+    }
+    
+    public void setJoaAtivo(String joaAtivo) {
+        this.joaAtivo = joaAtivo;
 
 
+    }
 }
 
 

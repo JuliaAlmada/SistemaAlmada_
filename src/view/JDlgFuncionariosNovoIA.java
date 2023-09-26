@@ -71,12 +71,18 @@ public class JDlgFuncionariosNovoIA extends javax.swing.JDialog {
         joafuncionario.setJoaEndereco(joa_jTxtEndereco.getText());
         joafuncionario.setJoaSexo(joa_jCboSexo.getSelectedIndex());
         joafuncionario.setJoaCarteiraTrabalho(joa_jFmtCarteiraTrabalho.getText());
-      
+          if (joa_jChbAtivo.isSelected() == true) {
+            joafuncionario.setJoaAtivo("S");
+        } else {
+            joafuncionario.setJoaAtivo("N");
+        }
+  
+
         return joafuncionario;
     }
 
     public void beanView(JoaFuncionario funcionarios) {
-        
+
         //transforma inteiro para string
         joa_jTxtCodigo.setText(Util.intStr(funcionarios.getIdjoaFuncionario()));;
         joa_jTxtNome.setText(funcionarios.getJoaNome());
@@ -93,6 +99,11 @@ public class JDlgFuncionariosNovoIA extends javax.swing.JDialog {
         joa_jTxtEndereco.setText(funcionarios.getJoaEndereco());
         joa_jCboSexo.setSelectedIndex(funcionarios.getJoaSexo());
         joa_jFmtCarteiraTrabalho.setText(funcionarios.getJoaCarteiraTrabalho());
+        if (joafuncionario.getJoaAtivo().equals("S") == true) {
+            joa_jChbAtivo.setSelected(true);
+        } else {
+            joa_jChbAtivo.setSelected(false);
+        }
     }
 
     /**
@@ -251,6 +262,7 @@ public class JDlgFuncionariosNovoIA extends javax.swing.JDialog {
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
+        joa_jBtnOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ok.png"))); // NOI18N
         joa_jBtnOk.setText("OK");
         joa_jBtnOk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -259,6 +271,7 @@ public class JDlgFuncionariosNovoIA extends javax.swing.JDialog {
         });
         jPanel1.add(joa_jBtnOk);
 
+        joa_jBtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         joa_jBtnCancelar.setText("CANCELAR");
         joa_jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -328,7 +341,7 @@ public class JDlgFuncionariosNovoIA extends javax.swing.JDialog {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 399, Short.MAX_VALUE)
+                .addGap(0, 381, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -465,15 +478,17 @@ public class JDlgFuncionariosNovoIA extends javax.swing.JDialog {
 
     private void joa_jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jBtnOkActionPerformed
         joafuncionario = ViewBean();
-      
-        funcionariosDAO.insert(joafuncionario);
 
+        funcionariosDAO.insert(joafuncionario);
+        Util.limparCampos(joa_jTxtCodigo, joa_jTxtNome, joa_jFmtCpf, joa_jTxtEmail, joa_jFmtTelefone, joa_jFmtCelular, joa_jTxtEmailReserva, joa_jFmtDataNascimento, joa_jTxtBairro, joa_jTxtCidade, joa_jTxtPais, joa_jTxtEndereco, joa_jFmtCep, joa_jCboSexo, joa_jFmtCarteiraTrabalho);
         setVisible(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_joa_jBtnOkActionPerformed
 
     private void joa_jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jBtnCancelarActionPerformed
         setVisible(false);
+        Util.limparCampos(joa_jTxtCodigo, joa_jTxtNome, joa_jFmtCpf, joa_jTxtEmail, joa_jFmtTelefone, joa_jFmtCelular, joa_jTxtEmailReserva, joa_jFmtDataNascimento, joa_jTxtBairro, joa_jTxtCidade, joa_jTxtPais, joa_jTxtEndereco, joa_jFmtCep, joa_jCboSexo, joa_jFmtCarteiraTrabalho);
+
         // TODO add your handling code here:
     }//GEN-LAST:event_joa_jBtnCancelarActionPerformed
 

@@ -39,7 +39,7 @@
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="joa_jBtnIncluir" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jao_jBtnAlterar" min="-2" max="-2" attributes="0"/>
+                              <Component id="joa_jBtnAlterar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="joa_jBtnExcluir" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
@@ -134,7 +134,7 @@
                   <Component id="joa_jBtnExcluir" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="joa_jBtnCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="joa_jBtnPesquisar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jao_jBtnAlterar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="joa_jBtnAlterar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="36" max="32767" attributes="0"/>
           </Group>
@@ -239,7 +239,7 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JButton" name="jao_jBtnAlterar">
+    <Component class="javax.swing.JButton" name="joa_jBtnAlterar">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/imagens/alterar.png"/>
@@ -247,7 +247,7 @@
         <Property name="text" type="java.lang.String" value="Alterar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jao_jBtnAlterarActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="joa_jBtnAlterarActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="joa_jBtnIncluir">

@@ -1,9 +1,5 @@
 package bean;
-<<<<<<< HEAD
 // Generated 22/09/2023 23:07:42 by Hibernate Tools 4.3.1
-=======
-// Generated 22/09/2023 22:28:12 by Hibernate Tools 4.3.1
->>>>>>> 66002ac7362d381f5d40c25923c99ed5d59db325
 
 
 import java.math.BigDecimal;
@@ -36,11 +32,7 @@ public class JoaVenda  implements java.io.Serializable {
      private JoaFuncionario joaFuncionario;
      private Date joaData;
      private double joaTotal;
-<<<<<<< HEAD
     
-=======
-  
->>>>>>> 66002ac7362d381f5d40c25923c99ed5d59db325
 
     public JoaVenda() {
     }
@@ -53,11 +45,7 @@ public class JoaVenda  implements java.io.Serializable {
         this.joaData = joaData;
         this.joaTotal = joaTotal;
     }
-<<<<<<< HEAD
   
-=======
- 
->>>>>>> 66002ac7362d381f5d40c25923c99ed5d59db325
    
      @Id 
 
@@ -113,12 +101,6 @@ public class JoaVenda  implements java.io.Serializable {
 
 
 
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> 66002ac7362d381f5d40c25923c99ed5d59db325
 }
 
 

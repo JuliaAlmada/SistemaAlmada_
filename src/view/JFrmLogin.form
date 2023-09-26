@@ -30,8 +30,8 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jPwfLogin" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jTxtLogin" alignment="0" max="32767" attributes="0"/>
+                  <Component id="joa_jPwfLogin" alignment="0" max="32767" attributes="0"/>
+                  <Component id="joa_jTxtLogin" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -40,11 +40,11 @@
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
-                      <Component id="jBtnEntrarLogin" min="-2" pref="75" max="-2" attributes="0"/>
+                      <Component id="joa_jBtnEntrarLogin" min="-2" pref="75" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                      <Component id="jBtnCancelarLogin" min="-2" max="-2" attributes="0"/>
+                      <Component id="joa_jBtnCancelarLogin" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="28" max="32767" attributes="0"/>
-                      <Component id="jBtnSair" min="-2" pref="75" max="-2" attributes="0"/>
+                      <Component id="joa_jBtnSair" min="-2" pref="75" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
@@ -57,16 +57,16 @@
               <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jTxtLogin" min="-2" pref="30" max="-2" attributes="0"/>
+              <Component id="joa_jTxtLogin" min="-2" pref="30" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jPwfLogin" min="-2" pref="30" max="-2" attributes="0"/>
+              <Component id="joa_jPwfLogin" min="-2" pref="30" max="-2" attributes="0"/>
               <EmptySpace pref="40" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jBtnCancelarLogin" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jBtnSair" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jBtnEntrarLogin" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="joa_jBtnCancelarLogin" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="joa_jBtnSair" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="joa_jBtnEntrarLogin" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
           </Group>
@@ -74,7 +74,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JTextField" name="jTxtLogin">
+    <Component class="javax.swing.JTextField" name="joa_jTxtLogin">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
@@ -86,30 +86,30 @@
         <Property name="text" type="java.lang.String" value="Senha"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jBtnEntrarLogin">
+    <Component class="javax.swing.JButton" name="joa_jBtnEntrarLogin">
       <Properties>
         <Property name="text" type="java.lang.String" value="Entrar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnEntrarLoginActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="joa_jBtnEntrarLoginActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jBtnCancelarLogin">
+    <Component class="javax.swing.JButton" name="joa_jBtnCancelarLogin">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cancelar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnCancelarLoginActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="joa_jBtnCancelarLoginActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JPasswordField" name="jPwfLogin">
+    <Component class="javax.swing.JPasswordField" name="joa_jPwfLogin">
     </Component>
-    <Component class="javax.swing.JButton" name="jBtnSair">
+    <Component class="javax.swing.JButton" name="joa_jBtnSair">
       <Properties>
         <Property name="text" type="java.lang.String" value="Sair"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnSairActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="joa_jBtnSairActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

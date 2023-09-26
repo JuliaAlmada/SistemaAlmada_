@@ -19,6 +19,7 @@ public class FuncionariosControle extends AbstractTableModel {
 
     public void setList(List lista) {
         this.lista = lista;
+         this.fireTableDataChanged();
     }
 
     public JoaFuncionario getBean(int row) {

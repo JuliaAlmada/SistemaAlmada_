@@ -8,6 +8,7 @@ package view;
 import bean.JoaProduto;
 import dao.ProdutoDAO;
 import java.text.ParseException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.text.DefaultFormatterFactory;
@@ -21,7 +22,9 @@ import tools.Util;
 public class JDlgProdutoNovoIA extends javax.swing.JDialog {
 
     MaskFormatter mascaraValorC, mascaraValorV;
-
+     ProdutoDAO produtoDAO;
+     ProdutosControle produtoControle;
+     JoaProduto produto;
     /**
      * Creates new form JDlgProdutoNovoIA
      */
@@ -31,6 +34,7 @@ public class JDlgProdutoNovoIA extends javax.swing.JDialog {
         Util.limparCampos(joa_jTxtCodigo1, joa_jTxtNome, joa_jTxtDescricao, joa_jFmtValorC, joa_jFmtValorV, joa_jCboCategoria);
         setLocationRelativeTo(null);
         setTitle("Cadastro de Produtos");
+   
         try {
             mascaraValorC = new MaskFormatter("###.##");
             mascaraValorV = new MaskFormatter("###.##");
@@ -53,7 +57,7 @@ public class JDlgProdutoNovoIA extends javax.swing.JDialog {
         return joaProduto;
     }
 
-    public void beanView(JoaProduto joaProduto) { 
+    public void beanView(JoaProduto joaProduto) {
         joa_jTxtCodigo1.setText(Util.intStr(joaProduto.getIdjoaProduto()));
         joa_jFmtValorV.setText(Util.doubleStr(joaProduto.getJoaValorVenda()));
         joa_jFmtValorC.setText(Util.doubleStr(joaProduto.getJoaValorCompra()));
@@ -211,20 +215,20 @@ public class JDlgProdutoNovoIA extends javax.swing.JDialog {
 
     private void joa_jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jBtnOkActionPerformed
         setVisible(false);
-              JoaProduto produto = viewBean();
+        JoaProduto produto = viewBean();
 
         ProdutoDAO produtoDAO = new ProdutoDAO();
 
         produtoDAO.insert(produto);
+        Util.limparCampos(joa_jTxtCodigo1, joa_jFmtValorV, joa_jFmtValorC, joa_jTxtNome, joa_jTxtDescricao, joa_jCboCategoria);
 
-       
-        Util.limparCampos();
         // TODO add your handling code here:
     }//GEN-LAST:event_joa_jBtnOkActionPerformed
 
     private void joa_jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jBtnCancelarActionPerformed
         setVisible(false);
-          Util.mensagem("Operação Cancelada!");
+        Util.mensagem("Operação Cancelada!");
+        Util.limparCampos(joa_jTxtCodigo1, joa_jFmtValorV, joa_jFmtValorC, joa_jTxtNome, joa_jTxtDescricao, joa_jCboCategoria);
         // TODO add your handling code here:
     }//GEN-LAST:event_joa_jBtnCancelarActionPerformed
 

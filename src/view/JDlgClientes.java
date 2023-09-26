@@ -37,8 +37,7 @@ public class JDlgClientes extends javax.swing.JDialog {
                 joa_jTxtEmail, joa_jTxtEmailRes, joa_jTxtCidade, joa_jTxtBairro,
                 joa_jTxtPais, joa_jTxtEndereco, joa_jFmtCelular, joa_jFmtCep, joa_jFmtCpf,
                 joa_jFmtCartaoFidelidade, joa_jFmtDataN, joa_jFmtTelefone, joa_jCboSexo,
-                joa_jChbAtivo , joa_jBtnExcluir,
-                joa_jBtnConfirmar, joa_jBtnCancelar);
+                joa_jChbAtivo ,joa_jBtnConfirmar, joa_jBtnCancelar);
         clientesDAO = new ClientesDAO();
         setTitle("Cadastro de Clientes");
         setLocationRelativeTo(null);
@@ -79,18 +78,16 @@ public class JDlgClientes extends javax.swing.JDialog {
         clientes.setJoaTelefone(joa_jFmtTelefone.getText());
         clientes.setJoaSexo(joa_jCboSexo.getSelectedIndex());
 
-       /* if (jChbAtivo.isSelected() == true) {
-            clientes.setAtivo("S");
+        if (joa_jChbAtivo.isSelected() == true) {
+            clientes.setJoaAtivo("S");
         } else {
-            clientes.setAtivo("N");
-        }*/
+            clientes.setJoaAtivo("N");
+        }
         return clientes;
     }
 
     public void beanView(JoaCliente clientes) {
-        String id = String.valueOf(clientes.getIdjoaCliente());
-        //transforma inteiro para string
-        joa_jTxtCodigo1.setText(id);
+        joa_jTxtCodigo1.setText(Util.intStr(clientes.getIdjoaCliente()));
         joa_jFmtDataN.setText(Util.Datestr(clientes.getJoaDataNascimento()));
         joa_jTxtNome.setText(clientes.getJoaNome());
         joa_jTxtEmail.setText(clientes.getJoaEmail());
@@ -106,11 +103,11 @@ public class JDlgClientes extends javax.swing.JDialog {
         joa_jFmtCep.setText(clientes.getJoaCep());
         joa_jFmtTelefone.setText(clientes.getJoaTelefone());
 
-     /*   if (clientes.getAtivo().equals("S") == true) {
-            jChbAtivo.setSelected(true);
+  if (clientes.getJoaAtivo().equals("S") == true) {
+            joa_jChbAtivo.setSelected(true);
         } else {
-            jChbAtivo.setSelected(false);
-        }*/
+            joa_jChbAtivo.setSelected(false);
+        }
 
     }
 
@@ -422,30 +419,22 @@ public class JDlgClientes extends javax.swing.JDialog {
                 joa_jTxtEmail, joa_jTxtEmailRes, joa_jTxtCidade, joa_jTxtBairro,
                 joa_jTxtPais, joa_jTxtEndereco, joa_jFmtCelular, joa_jFmtCep, joa_jFmtCpf,
                 joa_jFmtCartaoFidelidade, joa_jFmtDataN, joa_jFmtTelefone, joa_jCboSexo,
-                joa_jChbAtivo, joa_jBtnIncluir, joa_jBtnExcluir, joa_jBtnAlterar, joa_jBtnPesquisar,
-                joa_jBtnConfirmar, joa_jBtnCancelar);
+                joa_jChbAtivo);
         Util.habilitar(true, joa_jTxtCodigo1,joa_jTxtNome,
                 joa_jTxtEmail, joa_jTxtEmailRes, joa_jTxtCidade, joa_jTxtBairro,
                 joa_jTxtPais, joa_jTxtEndereco, joa_jFmtCelular, joa_jFmtCep, joa_jFmtCpf,
                 joa_jFmtCartaoFidelidade, joa_jFmtDataN, joa_jFmtTelefone, joa_jCboSexo,
-                joa_jChbAtivo, joa_jBtnIncluir, joa_jBtnExcluir, joa_jBtnAlterar, joa_jBtnPesquisar,
-                joa_jBtnConfirmar, joa_jBtnCancelar);
+                joa_jChbAtivo,  joa_jBtnConfirmar, joa_jBtnCancelar);
+        Util.habilitar(false,joa_jBtnIncluir, joa_jBtnAlterar, joa_jBtnExcluir, joa_jBtnPesquisar);
         incluindo = true;
     }//GEN-LAST:event_joa_jBtnIncluirActionPerformed
 
     private void joa_jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jBtnAlterarActionPerformed
-        Util.limparCampos(joa_jTxtCodigo1,joa_jTxtNome,
+          Util.habilitar(true, joa_jTxtCodigo1,joa_jTxtNome,joa_jBtnExcluir,
                 joa_jTxtEmail, joa_jTxtEmailRes, joa_jTxtCidade, joa_jTxtBairro,
                 joa_jTxtPais, joa_jTxtEndereco, joa_jFmtCelular, joa_jFmtCep, joa_jFmtCpf,
                 joa_jFmtCartaoFidelidade, joa_jFmtDataN, joa_jFmtTelefone, joa_jCboSexo,
-                joa_jChbAtivo, joa_jBtnIncluir, joa_jBtnExcluir, joa_jBtnAlterar, joa_jBtnPesquisar,
-                joa_jBtnConfirmar, joa_jBtnCancelar);
-        Util.habilitar(true, joa_jTxtCodigo1,joa_jTxtNome,
-                joa_jTxtEmail, joa_jTxtEmailRes, joa_jTxtCidade, joa_jTxtBairro,
-                joa_jTxtPais, joa_jTxtEndereco, joa_jFmtCelular, joa_jFmtCep, joa_jFmtCpf,
-                joa_jFmtCartaoFidelidade, joa_jFmtDataN, joa_jFmtTelefone, joa_jCboSexo,
-                joa_jChbAtivo, joa_jBtnIncluir, joa_jBtnExcluir, joa_jBtnAlterar, joa_jBtnPesquisar,
-                joa_jBtnConfirmar, joa_jBtnCancelar);
+                joa_jChbAtivo,  joa_jBtnConfirmar, joa_jBtnCancelar);
         incluindo=false;
     }//GEN-LAST:event_joa_jBtnAlterarActionPerformed
 
@@ -456,14 +445,13 @@ public class JDlgClientes extends javax.swing.JDialog {
                 joa_jTxtEmail, joa_jTxtEmailRes, joa_jTxtCidade, joa_jTxtBairro,
                 joa_jTxtPais, joa_jTxtEndereco, joa_jFmtCelular, joa_jFmtCep, joa_jFmtCpf,
                 joa_jFmtCartaoFidelidade, joa_jFmtDataN, joa_jFmtTelefone, joa_jCboSexo,
-                joa_jChbAtivo, joa_jBtnIncluir, joa_jBtnExcluir, joa_jBtnAlterar, joa_jBtnPesquisar,
-                joa_jBtnConfirmar, joa_jBtnCancelar);
+                joa_jChbAtivo);
         Util.habilitar(false, joa_jTxtCodigo1,joa_jTxtNome,
                 joa_jTxtEmail, joa_jTxtEmailRes, joa_jTxtCidade, joa_jTxtBairro,
                 joa_jTxtPais, joa_jTxtEndereco, joa_jFmtCelular, joa_jFmtCep, joa_jFmtCpf,
                 joa_jFmtCartaoFidelidade, joa_jFmtDataN, joa_jFmtTelefone, joa_jCboSexo,
-                joa_jChbAtivo,  joa_jBtnExcluir,  
-                joa_jBtnConfirmar, joa_jBtnCancelar);
+                joa_jChbAtivo,joa_jBtnConfirmar, joa_jBtnCancelar);
+          Util.habilitar(true,joa_jBtnIncluir, joa_jBtnAlterar, joa_jBtnExcluir, joa_jBtnPesquisar);
     }//GEN-LAST:event_joa_jBtnExcluirActionPerformed
 
     private void joa_jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jBtnCancelarActionPerformed
@@ -472,14 +460,13 @@ public class JDlgClientes extends javax.swing.JDialog {
                 joa_jTxtEmail, joa_jTxtEmailRes, joa_jTxtCidade, joa_jTxtBairro,
                 joa_jTxtPais, joa_jTxtEndereco, joa_jFmtCelular, joa_jFmtCep, joa_jFmtCpf,
                 joa_jFmtCartaoFidelidade, joa_jFmtDataN, joa_jFmtTelefone, joa_jCboSexo,
-                joa_jChbAtivo, joa_jBtnIncluir, joa_jBtnExcluir, joa_jBtnAlterar, joa_jBtnPesquisar,
-                joa_jBtnConfirmar, joa_jBtnCancelar);
-        Util.habilitar(false, joa_jTxtCodigo1,joa_jTxtNome,
+                joa_jChbAtivo);
+      Util.habilitar(false, joa_jTxtCodigo1, joa_jTxtNome,
                 joa_jTxtEmail, joa_jTxtEmailRes, joa_jTxtCidade, joa_jTxtBairro,
                 joa_jTxtPais, joa_jTxtEndereco, joa_jFmtCelular, joa_jFmtCep, joa_jFmtCpf,
                 joa_jFmtCartaoFidelidade, joa_jFmtDataN, joa_jFmtTelefone, joa_jCboSexo,
-                joa_jChbAtivo,  joa_jBtnExcluir,  joa_jBtnPesquisar,
-                joa_jBtnConfirmar, joa_jBtnCancelar);
+                joa_jChbAtivo ,joa_jBtnConfirmar, joa_jBtnCancelar);
+         Util.habilitar(true,joa_jBtnIncluir, joa_jBtnAlterar, joa_jBtnExcluir, joa_jBtnPesquisar);
     }//GEN-LAST:event_joa_jBtnCancelarActionPerformed
 
     private void joa_jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jBtnPesquisarActionPerformed
@@ -502,12 +489,12 @@ public class JDlgClientes extends javax.swing.JDialog {
                 joa_jFmtCartaoFidelidade, joa_jFmtDataN, joa_jFmtTelefone, joa_jCboSexo,
                 joa_jChbAtivo, joa_jBtnIncluir, joa_jBtnExcluir, joa_jBtnAlterar, joa_jBtnPesquisar,
                 joa_jBtnConfirmar, joa_jBtnCancelar);
-        Util.habilitar(true, joa_jTxtCodigo1,joa_jTxtNome,
+        Util.habilitar(false, joa_jTxtCodigo1,joa_jTxtNome,
                 joa_jTxtEmail, joa_jTxtEmailRes, joa_jTxtCidade, joa_jTxtBairro,
                 joa_jTxtPais, joa_jTxtEndereco, joa_jFmtCelular, joa_jFmtCep, joa_jFmtCpf,
                 joa_jFmtCartaoFidelidade, joa_jFmtDataN, joa_jFmtTelefone, joa_jCboSexo,
-                joa_jChbAtivo, joa_jBtnIncluir, joa_jBtnExcluir, joa_jBtnAlterar, joa_jBtnPesquisar,
-                joa_jBtnConfirmar, joa_jBtnCancelar);
+                joa_jChbAtivo, joa_jBtnCancelar,joa_jBtnConfirmar);
+           Util.habilitar(true,joa_jBtnIncluir, joa_jBtnAlterar, joa_jBtnExcluir, joa_jBtnPesquisar);
     }//GEN-LAST:event_joa_jBtnConfirmarActionPerformed
 
     private void joa_jFmtCartaoFidelidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jFmtCartaoFidelidadeActionPerformed

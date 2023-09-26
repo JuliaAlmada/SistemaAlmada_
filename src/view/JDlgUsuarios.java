@@ -34,6 +34,7 @@ public class JDlgUsuarios extends javax.swing.JDialog {
     MaskFormatter mascaraCPF, mascaraDataNascimento;
     public UsuariosDAO usuariosDAO;
     public JoaUsuario joausuarios;
+
     //variavel global declarada entre o construtor e a classe private boolean incluindo;
     //pode colocar em qualquer local menos no metodo
     //variável global é definida quando declaramos uma variável fora de qualquer função
@@ -45,6 +46,7 @@ public class JDlgUsuarios extends javax.swing.JDialog {
         initComponents();
         usuariosDAO = new UsuariosDAO();
         Util.habilitar(false, joa_jTxtCodigo, joa_jTxtNome, joa_jTxtApelido, joa_jFmtCpf, joa_jFmtDataN, joa_jPwfSenha, joa_jCboNivel, joa_jChbAtivo, joa_jBtnCancelar, joa_jBtnConfirmar);
+        Util.habilitar(true,joa_jBtnIncluir, joa_jBtnPesquisar, joa_jBtnAlterar, joa_jBtnExcluir);
         setTitle("Cadastro de usuários");
         setLocationRelativeTo(null);
         try {
@@ -57,16 +59,16 @@ public class JDlgUsuarios extends javax.swing.JDialog {
         joa_jFmtDataN.setFormatterFactory(new DefaultFormatterFactory(mascaraDataNascimento));
 
     }
-    
+
     public JoaUsuario viewBean() {
         JoaUsuario joausuarios = new JoaUsuario();
-        
-       /*novo jeito de converter. Apartir do Util*/ 
+
+        /*novo jeito de converter. Apartir do Util*/
         joausuarios.setIdjoaUsuario(Util.strInt(joa_jTxtCodigo.getText()));
         joausuarios.setJoaNome(joa_jTxtNome.getText());
         joausuarios.setJoaNickname(joa_jTxtApelido.getText());
         joausuarios.setJoaDataNascimento(Util.strDate(joa_jFmtDataN.getText()));
-        joausuarios.setJoaCpf(joa_jFmtCpf.getText());       
+        joausuarios.setJoaCpf(joa_jFmtCpf.getText());
         joausuarios.setJoaSenha(joa_jPwfSenha.getText());
         joausuarios.setJoaNivel(joa_jCboNivel.getSelectedIndex());
         if (joa_jChbAtivo.isSelected() == true) {
@@ -75,12 +77,12 @@ public class JDlgUsuarios extends javax.swing.JDialog {
             joausuarios.setJoaAtivo("N");
         }
         return joausuarios;
-        
+
     }
 
     public void beanView(JoaUsuario joausuarios) {
-     
-          joa_jTxtCodigo.setText(Util.intStr(joausuarios.getIdjoaUsuario()));
+
+        joa_jTxtCodigo.setText(Util.intStr(joausuarios.getIdjoaUsuario()));
 
         joa_jFmtDataN.setText(Util.Datestr(joausuarios.getJoaDataNascimento()));
         joa_jTxtNome.setText(joausuarios.getJoaNome());
@@ -121,7 +123,7 @@ public class JDlgUsuarios extends javax.swing.JDialog {
         jLabel8 = new javax.swing.JLabel();
         joa_jChbAtivo = new javax.swing.JCheckBox();
         joa_jCboNivel = new javax.swing.JComboBox<>();
-        jao_jBtnAlterar = new javax.swing.JButton();
+        joa_jBtnAlterar = new javax.swing.JButton();
         joa_jBtnIncluir = new javax.swing.JButton();
         joa_jBtnConfirmar = new javax.swing.JButton();
         joa_jBtnExcluir = new javax.swing.JButton();
@@ -222,11 +224,11 @@ public class JDlgUsuarios extends javax.swing.JDialog {
             }
         });
 
-        jao_jBtnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/alterar.png"))); // NOI18N
-        jao_jBtnAlterar.setText("Alterar");
-        jao_jBtnAlterar.addActionListener(new java.awt.event.ActionListener() {
+        joa_jBtnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/alterar.png"))); // NOI18N
+        joa_jBtnAlterar.setText("Alterar");
+        joa_jBtnAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jao_jBtnAlterarActionPerformed(evt);
+                joa_jBtnAlterarActionPerformed(evt);
             }
         });
 
@@ -283,7 +285,7 @@ public class JDlgUsuarios extends javax.swing.JDialog {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(joa_jBtnIncluir)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jao_jBtnAlterar)
+                                .addComponent(joa_jBtnAlterar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(joa_jBtnExcluir)
                                 .addGap(6, 6, 6)
@@ -360,7 +362,7 @@ public class JDlgUsuarios extends javax.swing.JDialog {
                     .addComponent(joa_jBtnExcluir)
                     .addComponent(joa_jBtnCancelar)
                     .addComponent(joa_jBtnPesquisar)
-                    .addComponent(jao_jBtnAlterar))
+                    .addComponent(joa_jBtnAlterar))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
 
@@ -370,7 +372,7 @@ public class JDlgUsuarios extends javax.swing.JDialog {
     private void joa_jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
         joausuarios = viewBean();
-       // Usuarios_DAO usuarios_DAO = new Usuarios_DAO();
+        // Usuarios_DAO usuarios_DAO = new Usuarios_DAO();
 
         if (incluindo == true) {
             usuariosDAO.insert(joausuarios);
@@ -378,54 +380,56 @@ public class JDlgUsuarios extends javax.swing.JDialog {
             usuariosDAO.update(joausuarios);
         }
 
-       Util.limparCampos(joa_jTxtCodigo, joa_jTxtNome, joa_jTxtApelido, joa_jFmtCpf, joa_jFmtDataN, joa_jPwfSenha, joa_jCboNivel, joa_jChbAtivo);
-       Util.habilitar(true, joa_jTxtCodigo, joa_jTxtNome, joa_jTxtApelido, joa_jFmtCpf, joa_jFmtDataN, joa_jPwfSenha, joa_jCboNivel, joa_jChbAtivo, joa_jBtnCancelar, joa_jBtnConfirmar);
-
+        Util.limparCampos(joa_jTxtCodigo, joa_jTxtNome, joa_jTxtApelido, joa_jFmtCpf, joa_jFmtDataN, joa_jPwfSenha, joa_jCboNivel, joa_jChbAtivo);
+         Util.habilitar(false, joa_jTxtCodigo, joa_jTxtNome, joa_jTxtApelido, joa_jFmtCpf, joa_jFmtDataN, joa_jPwfSenha, joa_jCboNivel, joa_jChbAtivo, joa_jBtnCancelar, joa_jBtnConfirmar);
+        Util.habilitar(true,joa_jBtnIncluir, joa_jBtnPesquisar, joa_jBtnAlterar, joa_jBtnExcluir);
     }//GEN-LAST:event_joa_jBtnConfirmarActionPerformed
 
     private void joa_jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jBtnIncluirActionPerformed
         // TODO add your handling code here:
         incluindo = true;
         Util.habilitar(true, joa_jTxtCodigo, joa_jTxtNome, joa_jTxtApelido, joa_jFmtCpf, joa_jFmtDataN, joa_jPwfSenha, joa_jCboNivel, joa_jChbAtivo, joa_jBtnCancelar, joa_jBtnConfirmar);
-        Util.habilitar(false, joa_jBtnIncluir, jao_jBtnAlterar, joa_jBtnExcluir, joa_jBtnPesquisar);
+        Util.habilitar(false,joa_jBtnIncluir, joa_jBtnPesquisar, joa_jBtnAlterar, joa_jBtnExcluir);
         Util.limparCampos(joa_jTxtCodigo, joa_jTxtNome, joa_jTxtApelido, joa_jFmtCpf, joa_jFmtDataN, joa_jPwfSenha, joa_jCboNivel, joa_jChbAtivo);
 
     }//GEN-LAST:event_joa_jBtnIncluirActionPerformed
 
-    private void jao_jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jao_jBtnAlterarActionPerformed
+    private void joa_jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jBtnAlterarActionPerformed
         // TODO add your handling code here:
-             incluindo = false;
-    }//GEN-LAST:event_jao_jBtnAlterarActionPerformed
+        incluindo = false;
+    Util.habilitar(true, joa_jTxtCodigo, joa_jTxtNome, joa_jTxtApelido, joa_jFmtCpf, joa_jFmtDataN, joa_jPwfSenha, joa_jCboNivel, joa_jChbAtivo, joa_jBtnCancelar, joa_jBtnConfirmar);
+    }//GEN-LAST:event_joa_jBtnAlterarActionPerformed
 
     private void joa_jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jBtnExcluirActionPerformed
-   
-       if (Util.perguntar("Deseja excluir o registro?") == true){
-           joausuarios=viewBean();
-           usuariosDAO.delete(joausuarios);
-       }
-       else {
-        
+
+        if (Util.perguntar("Deseja excluir o registro?") == true) {
+            joausuarios = viewBean();
+            usuariosDAO.delete(joausuarios);
+        } else {
+
             Util.mensagem("Exclusão cancelada");
         }
-      
+        Util.habilitar(false, joa_jTxtCodigo, joa_jTxtNome, joa_jTxtApelido, joa_jFmtCpf, joa_jFmtDataN, joa_jPwfSenha, joa_jCboNivel, joa_jChbAtivo, joa_jBtnCancelar, joa_jBtnConfirmar);
+        Util.habilitar(true,joa_jBtnIncluir, joa_jBtnPesquisar, joa_jBtnAlterar, joa_jBtnExcluir);
         Util.limparCampos(joa_jTxtCodigo, joa_jTxtNome, joa_jTxtApelido, joa_jFmtCpf, joa_jFmtDataN, joa_jPwfSenha, joa_jCboNivel, joa_jChbAtivo);
 
     }//GEN-LAST:event_joa_jBtnExcluirActionPerformed
 
     private void joa_jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jBtnCancelarActionPerformed
         // TODO add your handling code here:
-  
+
         Util.mensagem("Operação cancelada");
         Util.limparCampos(joa_jTxtCodigo, joa_jTxtNome, joa_jTxtApelido, joa_jFmtCpf, joa_jFmtDataN, joa_jPwfSenha, joa_jCboNivel, joa_jChbAtivo);
-
+        Util.habilitar(false, joa_jTxtCodigo, joa_jTxtNome, joa_jTxtApelido, joa_jFmtCpf, joa_jFmtDataN, joa_jPwfSenha, joa_jCboNivel, joa_jChbAtivo, joa_jBtnCancelar, joa_jBtnConfirmar);
+        Util.habilitar(true,joa_jBtnIncluir, joa_jBtnPesquisar, joa_jBtnAlterar, joa_jBtnExcluir);
     }//GEN-LAST:event_joa_jBtnCancelarActionPerformed
 
     private void joa_jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jBtnPesquisarActionPerformed
- 
+
         JDlgUsuariosPesquisa jDlgUsuariosPesquisa = new JDlgUsuariosPesquisa(null, true);
         jDlgUsuariosPesquisa.setTelaAnterior(this);
         jDlgUsuariosPesquisa.setVisible(true);
-        
+
     }//GEN-LAST:event_joa_jBtnPesquisarActionPerformed
 
     private void joa_jTxtNomeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_joa_jTxtNomeFocusGained
@@ -573,7 +577,7 @@ public class JDlgUsuarios extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JButton jao_jBtnAlterar;
+    private javax.swing.JButton joa_jBtnAlterar;
     private javax.swing.JButton joa_jBtnCancelar;
     private javax.swing.JButton joa_jBtnConfirmar;
     private javax.swing.JButton joa_jBtnExcluir;

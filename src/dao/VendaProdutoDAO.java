@@ -27,7 +27,7 @@ public class VendaProdutoDAO extends DAO_Abstract {
     @Override
     public void update(Object object) {
         session.beginTransaction();
-        session.save(object);
+        session.update(object);
         session.getTransaction().commit();
         session.flush();
         session.clear();
@@ -36,7 +36,7 @@ public class VendaProdutoDAO extends DAO_Abstract {
     @Override
     public void delete(Object object) {
         session.beginTransaction();
-        session.save(object);
+        session.delete(object);
         session.getTransaction().commit();
         session.flush();
         session.clear();

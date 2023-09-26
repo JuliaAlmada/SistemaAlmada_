@@ -27,7 +27,7 @@ public class VendaDAO extends DAO_Abstract {
     @Override
     public void update(Object object) {
         session.beginTransaction();
-        session.save(object);
+        session.update(object);
         session.getTransaction().commit();
         session.flush();
         session.clear();
@@ -36,7 +36,7 @@ public class VendaDAO extends DAO_Abstract {
     @Override
     public void delete(Object object) {
         session.beginTransaction();
-        session.save(object);
+        session.delete(object);
         session.getTransaction().commit();
         session.flush();
         session.clear();
@@ -46,7 +46,7 @@ public class VendaDAO extends DAO_Abstract {
     public Object list(int id) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(JoaVenda.class);
-        criteria.add(Restrictions.eq("idjoaUsuario", id));
+        criteria.add(Restrictions.eq("idjoaVenda", id));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;
