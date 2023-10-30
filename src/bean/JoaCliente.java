@@ -239,6 +239,19 @@ public class JoaCliente  implements java.io.Serializable {
 
 
     }
+     @Override
+    public String toString(){
+    return this.getJoaNome();
+    }
+    
+    public boolean equals (Object object){
+    if(object instanceof JoaCliente){
+        JoaCliente joaCliente = (JoaCliente) object;
+    if(this.getIdjoaCliente()==joaCliente.getIdjoaCliente()){
+    return true;
+    }
+    }
+    return false;
 }
-
+}
 

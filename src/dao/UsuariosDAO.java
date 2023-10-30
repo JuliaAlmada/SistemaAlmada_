@@ -17,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -68,13 +69,13 @@ public class UsuariosDAO extends DAO_Abstract {
         session.getTransaction().commit();
         return lista;
     }
- public JoaUsuario Login(String joa_nickname, String joa_senha) {
-      
 
-    JoaUsuario usuarios = null;
+    public JoaUsuario Login(String joa_nickname, String joa_senha) {
+
+        JoaUsuario usuarios = null;
 
         String url = /*"jdbc:mysql://127.0.0.1:3306/db_juliaalmada"; */ "jdbc:mysql://10.7.51:33062/db_julia_almada";
-        String user =/* "root";*/  "julia_almada";
+        String user =/* "root";*/ "julia_almada";
         String password = /*""; */ "julia_almada";
 
         try {
@@ -105,6 +106,41 @@ public class UsuariosDAO extends DAO_Abstract {
 
         return usuarios;
 
-
     }
+
+    public List listNome(String nome) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(JoaUsuario.class);
+        criteria.add(Restrictions.ilike("joaNome", nome, MatchMode.ANYWHERE));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+
+    public List listCpf(String cpf) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(JoaUsuario.class);
+        criteria.add(Restrictions.ilike("joaCpf", cpf, MatchMode.ANYWHERE));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+    public List listNomeCpf(String cpf, String nome) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(JoaUsuario.class);
+        criteria.add(Restrictions.ilike("joaCpf", cpf, MatchMode.ANYWHERE));
+        criteria.add(Restrictions.ilike("joaNome", nome, MatchMode.ANYWHERE));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+
+/*public static void main (String[] args){
+        UsuariosDAO usuariosDAO = new UsuariosDAO();
+        List lista = usuariosDAO.listAll();
+       for (Object usuarios : lista){
+            System.out.println("joaNome: "+(JoaUsuario)usuarios).getJoaNome();}
+        
+        
+    }*/
 }
