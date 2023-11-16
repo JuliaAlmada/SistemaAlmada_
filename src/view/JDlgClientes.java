@@ -206,7 +206,7 @@ public class JDlgClientes extends javax.swing.JDialog {
             }
         });
 
-        joa_jCboSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Feminino", "Masculino", "Outro" }));
+        joa_jCboSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No sexo", "Feminino", "Masculino" }));
 
         joa_jBtnConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/gravar.png"))); // NOI18N
         joa_jBtnConfirmar.setText("Confirmar");

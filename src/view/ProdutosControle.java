@@ -16,10 +16,9 @@ import javax.swing.table.AbstractTableModel;
 public class ProdutosControle extends AbstractTableModel {
 
     private List lista;
-
-    public void setList(List lista) {
-        this.lista = lista;
-        this.fireTableDataChanged();
+  public void setList(List lista){
+    this.lista = lista;
+    this.fireTableDataChanged();
     }
 
     public JoaProduto getBean(int row) {

@@ -8,6 +8,8 @@ package tools;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
@@ -73,17 +75,17 @@ public class Util {
        }
        
        public static Date strDate (String cad){
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat formataNascimento = new SimpleDateFormat("yyyy/MM/dd"); //convertendo string para Date
         try {
-            return formato.parse(cad);
-        } catch (ParseException e) {
-            e.printStackTrace();
+            return formataNascimento.parse(cad);
+        } catch (ParseException ex) {
+            Logger.getLogger(Util.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
        }
        
        public static String Datestr (Date date){
-         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+         SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
         return formato.format(date);
        }
        

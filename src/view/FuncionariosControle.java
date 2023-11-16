@@ -16,11 +16,11 @@ import javax.swing.table.AbstractTableModel;
 public class FuncionariosControle extends AbstractTableModel {
 
     private List lista;
-
-    public void setList(List lista) {
-        this.lista = lista;
-         this.fireTableDataChanged();
+  public void setList(List lista){
+    this.lista = lista;
+    this.fireTableDataChanged();
     }
+
 
     public JoaFuncionario getBean(int row) {
         return (JoaFuncionario) lista.get(row);
@@ -33,7 +33,7 @@ public class FuncionariosControle extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 16;
+        return 8;
     }
 
     @Override
@@ -54,7 +54,7 @@ public class FuncionariosControle extends AbstractTableModel {
         if (columnIndex == 4) {
             return funcionarios.getJoaCpf();
         }
-        if (columnIndex == 5) {
+       /* if (columnIndex == 5) {
             return funcionarios.getJoaEmailReserva();
         }
         if (columnIndex == 6) {
@@ -69,24 +69,24 @@ public class FuncionariosControle extends AbstractTableModel {
 
         if (columnIndex == 9) {
             return funcionarios.getJoaCidade();
-        }
-        if (columnIndex == 10) {
+        }*/
+        if (columnIndex == 5) {
             return funcionarios.getJoaCep();
         }
-        if (columnIndex == 11) {
+        if (columnIndex == 6) {
             return funcionarios.getJoaCarteiraTrabalho();
         }
-        if (columnIndex == 12) {
+        if (columnIndex == 7) {
             return funcionarios.getJoaDataNascimento();
         }
 
-        if (columnIndex == 13) {
+       /* if (columnIndex == 5) {
             return funcionarios.getJoaSexo();
         }
 
-        if (columnIndex == 14) {
+        if (columnIndex == 6) {
             return funcionarios.getJoaCelular();
-        }
+        }*/
         return "";
     }
 
@@ -107,7 +107,7 @@ public class FuncionariosControle extends AbstractTableModel {
         if (column == 4) {
             return "joa_cpf";
         }
-        if (column == 5) {
+       /* if (column == 5) {
             return "joa_emailReserva";
         }
         if (column == 6) {
@@ -121,23 +121,23 @@ public class FuncionariosControle extends AbstractTableModel {
         }
         if (column == 9) {
             return "joa_cidade";
-        }
-        if (column == 10) {
+        }*/
+        if (column == 5) {
             return "joa_cep";
         }
-        if (column == 11) {
+        if (column == 6) {
             return "joa_carteiraTrabalho";
         }
-        if (column == 12) {
+        if (column == 7) {
             return "joa_dataNascimento";
         }
-        if (column == 13) {
+       /* if (column == 5) {
             return "joa_sexo";
         }
      
-        if (column == 15) {
+        if (column == 6) {
             return "joa_celular";
-        }
+        }*/
         return "";
     }
 }

@@ -6,10 +6,19 @@
 package view;
 
 import bean.JoaCliente;
+import bean.JoaFuncionario;
+import bean.JoaVenda;
+import dao.ClientesDAO;
+import dao.FuncionarioDAO;
+import dao.VendaDAO;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
 import tools.Util;
 import view.JDlgIAoProduto_Vendas;
 import view.JDlgPesquisaVendas;
-
 
 /**
  *
@@ -17,9 +26,8 @@ import view.JDlgPesquisaVendas;
  */
 public class JDlgVendas extends javax.swing.JDialog {
 
-   
-    
     JDlgIAoProduto_Vendas jDlgInclusaoProduto_Vendas;
+    private boolean incluindo;
     /**
      * Creates new form JDlgVendas
      */
@@ -27,14 +35,60 @@ public class JDlgVendas extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         jDlgInclusaoProduto_Vendas = new JDlgIAoProduto_Vendas(null, true);
-     
-      
+
         setTitle("Vendas");
         setLocationRelativeTo(null);
+        
+        ClientesDAO clientes_DAO = new ClientesDAO();
+        List lista = clientes_DAO.listAll();
+        for (int i = 0; i < lista.size(); i++) {
+            JoaCliente clientes = (JoaCliente) lista.get(i);
+            joa_jCboClientes.addItem(clientes);
+        }
+        FuncionarioDAO vendedores_DAO = new FuncionarioDAO();
+        List lista1 = vendedores_DAO.listAll();
+        for (int i = 0; i < lista1.size(); i++) {
+            JoaFuncionario funcionario = (JoaFuncionario) lista1.get(i);
+            joa_jCboVendedores.addItem(funcionario);
+        }
 
     }
+    
+    
+     public JoaVenda viewBean() {
+        JoaVenda vendas = new JoaVenda();
+        int id = Integer.parseInt(joa_jTxtCodigo.getText());
+        double valor = Double.parseDouble(joa_jFmtTotal.getText());
+        vendas.setJoaData(Util.strDate(joa_jFmtData.getText()));
+        JoaCliente clientes1 = (JoaCliente) joa_jCboClientes.getSelectedItem();
+        vendas.setJoaCliente((clientes1.getIdjoaCliente()));
+        JoaFuncionario funcionario1 = (JoaFuncionario) joa_jCboVendedores.getSelectedItem();
+        vendas.setJoaFuncionario((funcionario1.getIdjoaFuncionario()));
+        
+        vendas.setIdjoaVenda(id);
+        vendas.setJoaTotal(valor);
+        return vendas;
+    }
 
-   
+    public void beanView(JoaVenda vendas) {
+        String id = String.valueOf(vendas.getIdjoaVenda());
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+
+        joa_jFmtData.setText(formato.format(vendas.getJoaData()));
+        joa_jTxtCodigo.setText(id);
+        
+       /* int idcliente = vendas.getJoaCliente();
+        int idfuncionario = vendas.getJoaFuncionario();
+        
+        ClientesDAO clientes_DAO = new ClientesDAO();
+        joa_jCboClientes.setSelectedItem(clientes_DAO.list(idcliente));
+        
+        FuncionarioDAO vendedores_DAO = new FuncionarioDAO();
+        joa_jCboVendedores.setSelectedItem(vendedores_DAO.list(idfuncionario));*/
+        
+        joa_jFmtTotal.setText(String.valueOf(vendas.getJoaTotal()));
+        
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -65,7 +119,7 @@ public class JDlgVendas extends javax.swing.JDialog {
         joa_jBtnAlterar1 = new javax.swing.JButton();
         joa_jBtnIncluir1 = new javax.swing.JButton();
         joa_jFmtTotal = new javax.swing.JFormattedTextField();
-        joa_jCboVendedores = new javax.swing.JComboBox<>();
+        joa_jCboVendedores = new javax.swing.JComboBox< JoaFuncionario>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -88,6 +142,12 @@ public class JDlgVendas extends javax.swing.JDialog {
         jLabel3.setText("Cliente");
 
         jLabel4.setText("Vendedor");
+
+        joa_jCboClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                joa_jCboClientesActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Total");
 
@@ -179,7 +239,6 @@ public class JDlgVendas extends javax.swing.JDialog {
             }
         });
 
-        joa_jCboVendedores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         joa_jCboVendedores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 joa_jCboVendedoresActionPerformed(evt);
@@ -210,18 +269,18 @@ public class JDlgVendas extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(joa_jFmtData, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
-                        .addGap(26, 26, 26)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(joa_jCboClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
                         .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(joa_jCboClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(35, 35, 35)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addComponent(joa_jCboVendedores, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(58, 58, 58)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
-                            .addComponent(joa_jFmtTotal)))
+                            .addComponent(joa_jFmtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(joa_jBtnIncluir)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -241,21 +300,24 @@ public class JDlgVendas extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(joa_jCboClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(joa_jCboVendedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(joa_jCboVendedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
-                        .addGap(12, 12, 12)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5))
+                                .addGap(12, 12, 12))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(joa_jTxtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(joa_jFmtData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(joa_jFmtData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(joa_jCboClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(joa_jFmtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -296,61 +358,83 @@ public class JDlgVendas extends javax.swing.JDialog {
     }//GEN-LAST:event_joa_jBtnPesquisarActionPerformed
 
     private void joa_jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jBtnIncluirActionPerformed
-
-         Util.limparCampos(joa_jTxtCodigo,joa_jFmtData,
+        incluindo = true;
+        Util.limparCampos(joa_jTxtCodigo, joa_jFmtData,
                 joa_jCboClientes, joa_jCboVendedores, joa_jFmtTotal,
                 joa_jBtnIncluir, joa_jBtnExcluir, joa_jBtnAlterar, joa_jBtnPesquisar,
                 joa_jBtnConfirmar, joa_jBtnCancelar);
-        Util.habilitar(true, joa_jTxtCodigo,joa_jFmtData,
+        Util.habilitar(true, joa_jTxtCodigo, joa_jFmtData,
                 joa_jCboClientes, joa_jCboVendedores, joa_jFmtTotal, joa_jBtnIncluir,
                 joa_jBtnExcluir, joa_jBtnAlterar, joa_jBtnPesquisar,
                 joa_jBtnConfirmar, joa_jBtnCancelar);
     }//GEN-LAST:event_joa_jBtnIncluirActionPerformed
 
     private void joa_jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jBtnExcluirActionPerformed
- if (Util.perguntar("Deseja excluir o usuario?") == true) {
-        } 
-   Util.limparCampos(joa_jTxtCodigo,joa_jFmtData,
+                int resp = JOptionPane.showConfirmDialog(null, "Deseja excluir o registro?",
+                "Exclusão", JOptionPane.YES_NO_OPTION);
+
+        if (resp == JOptionPane.YES_OPTION) {
+            JoaVenda vendas = viewBean();
+            VendaDAO vendas_DAO = new VendaDAO();
+            vendas_DAO.delete(vendas);
+        } else {
+            JOptionPane.showMessageDialog(null, "Exclusão cancelada");
+        }
+
+
+        if (Util.perguntar("Deseja excluir o usuario?") == true) {
+        }
+        Util.limparCampos(joa_jTxtCodigo, joa_jFmtData,
                 joa_jCboClientes, joa_jCboVendedores, joa_jFmtTotal,
                 joa_jBtnIncluir, joa_jBtnExcluir, joa_jBtnAlterar, joa_jBtnPesquisar,
                 joa_jBtnConfirmar, joa_jBtnCancelar);
-        Util.habilitar(false, joa_jTxtCodigo,joa_jFmtData,
-                joa_jCboClientes, joa_jCboVendedores, joa_jFmtTotal, 
-                joa_jBtnExcluir,  joa_jBtnPesquisar,
+        Util.habilitar(false, joa_jTxtCodigo, joa_jFmtData,
+                joa_jCboClientes, joa_jCboVendedores, joa_jFmtTotal,
+                joa_jBtnExcluir, joa_jBtnPesquisar,
                 joa_jBtnConfirmar, joa_jBtnCancelar);
     }//GEN-LAST:event_joa_jBtnExcluirActionPerformed
 
     private void joa_jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jBtnAlterarActionPerformed
         // TODO add your handling code here:
-         Util.limparCampos(joa_jTxtCodigo,joa_jFmtData,
+                incluindo = false;
+        Util.limparCampos(joa_jTxtCodigo, joa_jFmtData,
                 joa_jCboClientes, joa_jCboVendedores, joa_jFmtTotal,
                 joa_jBtnIncluir, joa_jBtnExcluir, joa_jBtnAlterar, joa_jBtnPesquisar,
                 joa_jBtnConfirmar, joa_jBtnCancelar);
-        Util.habilitar(true, joa_jTxtCodigo,joa_jFmtData,
+        Util.habilitar(true, joa_jTxtCodigo, joa_jFmtData,
                 joa_jCboClientes, joa_jCboVendedores, joa_jFmtTotal, joa_jBtnIncluir,
                 joa_jBtnExcluir, joa_jBtnAlterar, joa_jBtnPesquisar,
                 joa_jBtnConfirmar, joa_jBtnCancelar);
     }//GEN-LAST:event_joa_jBtnAlterarActionPerformed
 
     private void joa_jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jBtnCancelarActionPerformed
-      Util.mensagem("Ação Cancelada");   
-        Util.limparCampos(joa_jTxtCodigo,joa_jFmtData,
+        Util.mensagem("Ação Cancelada");
+        Util.limparCampos(joa_jTxtCodigo, joa_jFmtData,
                 joa_jCboClientes, joa_jCboVendedores, joa_jFmtTotal,
                 joa_jBtnIncluir, joa_jBtnExcluir, joa_jBtnAlterar, joa_jBtnPesquisar,
                 joa_jBtnConfirmar, joa_jBtnCancelar);
-        Util.habilitar(false, joa_jTxtCodigo,joa_jFmtData,
-                joa_jCboClientes, joa_jCboVendedores, joa_jFmtTotal, 
+        Util.habilitar(false, joa_jTxtCodigo, joa_jFmtData,
+                joa_jCboClientes, joa_jCboVendedores, joa_jFmtTotal,
                 joa_jBtnExcluir, joa_jBtnPesquisar,
                 joa_jBtnConfirmar, joa_jBtnCancelar);
     }//GEN-LAST:event_joa_jBtnCancelarActionPerformed
 
     private void joa_jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
-          Util.limparCampos(joa_jTxtCodigo,joa_jFmtData,
+        JoaVenda vendas = viewBean();
+        VendaDAO vendas_DAO = new VendaDAO();
+
+        if (incluindo == true) {
+            vendas_DAO.insert(vendas);
+        } else {
+            vendas_DAO.update(vendas);
+        }
+   
+        Util.limparCampos(joa_jTxtCodigo, joa_jFmtData,
                 joa_jCboClientes, joa_jCboVendedores, joa_jFmtTotal,
                 joa_jBtnIncluir, joa_jBtnExcluir, joa_jBtnAlterar, joa_jBtnPesquisar,
                 joa_jBtnConfirmar, joa_jBtnCancelar);
-        Util.habilitar(true, joa_jTxtCodigo,joa_jFmtData,
+        Util.habilitar(true, joa_jTxtCodigo, joa_jFmtData,
                 joa_jCboClientes, joa_jCboVendedores, joa_jFmtTotal, joa_jBtnIncluir,
                 joa_jBtnExcluir, joa_jBtnAlterar, joa_jBtnPesquisar,
                 joa_jBtnConfirmar, joa_jBtnCancelar);
@@ -359,19 +443,19 @@ public class JDlgVendas extends javax.swing.JDialog {
     private void joa_jBtbExcluir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jBtbExcluir1ActionPerformed
         // TODO add your handling code here:
         if (Util.perguntar("Deseja excluir o usuario?") == true) {
-        }     
+        }
     }//GEN-LAST:event_joa_jBtbExcluir1ActionPerformed
 
     private void joa_jBtnAlterar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jBtnAlterar1ActionPerformed
         // TODO add your handling code here:
-       jDlgInclusaoProduto_Vendas.setTitle("Alteração");
-       jDlgInclusaoProduto_Vendas.setVisible(true);
+        jDlgInclusaoProduto_Vendas.setTitle("Alteração");
+        jDlgInclusaoProduto_Vendas.setVisible(true);
     }//GEN-LAST:event_joa_jBtnAlterar1ActionPerformed
 
     private void joa_jBtnIncluir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jBtnIncluir1ActionPerformed
         // TODO add your handling code here:
-       jDlgInclusaoProduto_Vendas.setTitle("Inclusão");
-      jDlgInclusaoProduto_Vendas.setVisible(true);
+        jDlgInclusaoProduto_Vendas.setTitle("Inclusão");
+        jDlgInclusaoProduto_Vendas.setVisible(true);
     }//GEN-LAST:event_joa_jBtnIncluir1ActionPerformed
 
     private void joa_jFmtDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jFmtDataActionPerformed
@@ -385,6 +469,12 @@ public class JDlgVendas extends javax.swing.JDialog {
     private void joa_jCboVendedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jCboVendedoresActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_joa_jCboVendedoresActionPerformed
+
+    private void joa_jCboClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jCboClientesActionPerformed
+        // TODO add your handling code here:
+       
+
+    }//GEN-LAST:event_joa_jCboClientesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -453,7 +543,7 @@ public class JDlgVendas extends javax.swing.JDialog {
     private javax.swing.JButton joa_jBtnIncluir1;
     private javax.swing.JButton joa_jBtnPesquisar;
     private javax.swing.JComboBox<JoaCliente> joa_jCboClientes;
-    private javax.swing.JComboBox<String> joa_jCboVendedores;
+    private javax.swing.JComboBox<JoaFuncionario> joa_jCboVendedores;
     private javax.swing.JFormattedTextField joa_jFmtData;
     private javax.swing.JFormattedTextField joa_jFmtTotal;
     private javax.swing.JTextField joa_jTxtCodigo;

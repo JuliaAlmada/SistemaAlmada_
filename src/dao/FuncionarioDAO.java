@@ -7,8 +7,10 @@ package dao;
 
 import bean.JoaCliente;
 import bean.JoaFuncionario;
+import java.util.Date;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -60,5 +62,29 @@ public class FuncionarioDAO extends DAO_Abstract {
         session.getTransaction().commit();
         return lista;
     }
-
+   public List listNome(String nome) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(JoaFuncionario.class);
+        criteria.add(Restrictions.ilike("joaNome", nome, MatchMode.ANYWHERE));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+        public List listData(Date data) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(JoaFuncionario.class);
+        criteria.add(Restrictions.eq("joaDataNascimento", data));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+     public List listNomeData(Date data, String nome) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(JoaFuncionario.class);
+        criteria.add(Restrictions.eq("joaDataNascimento", data));
+        criteria.add(Restrictions.ilike("joaNome", nome, MatchMode.ANYWHERE));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
 }

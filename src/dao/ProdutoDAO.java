@@ -7,8 +7,10 @@ package dao;
 
 import bean.JoaCliente;
 import bean.JoaProduto;
+import bean.JoaVenda;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -61,4 +63,31 @@ public class ProdutoDAO extends DAO_Abstract {
         return lista;
     }
 
+    public List listNome(String nome) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(JoaProduto.class);
+        criteria.add(Restrictions.ilike("joaNome", nome, MatchMode.ANYWHERE));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+
+    public List listValor(double valor) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(JoaProduto.class);
+        criteria.add(Restrictions.eq("joaValorVenda", valor));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+
+    public List listNomeValor(double valor, String nome) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(JoaProduto.class);
+        criteria.add(Restrictions.eq("joaValorVenda", valor));
+        criteria.add(Restrictions.ilike("joaNome", nome, MatchMode.ANYWHERE));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
 }

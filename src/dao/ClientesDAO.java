@@ -6,8 +6,10 @@
 package dao;
 
 import bean.JoaCliente;
+import java.util.Date;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -61,4 +63,29 @@ public class ClientesDAO extends DAO_Abstract {
         return lista;
     }
 
+    public List listNome(String nome) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(JoaCliente.class);
+        criteria.add(Restrictions.ilike("joaNome", nome, MatchMode.ANYWHERE));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+        public List listData(Date data) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(JoaCliente.class);
+        criteria.add(Restrictions.eq("joaDataNascimento", data));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+     public List listNomeData(Date data, String nome) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(JoaCliente.class);
+        criteria.add(Restrictions.eq("joaDataNascimento", data));
+        criteria.add(Restrictions.ilike("joaNome", nome, MatchMode.ANYWHERE));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
 }

@@ -36,7 +36,7 @@ public class JDlgFuncionariosNovoIA extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         try {
             mascaraCPF = new MaskFormatter("###.###.###-##");
-            mascaraDataNascimento = new MaskFormatter("##/##/####");
+            mascaraDataNascimento = new MaskFormatter("####/##/##");
             mascaraCelular = new MaskFormatter("(##)#####-####");
             mascaraTelefone = new MaskFormatter("(##)#####-####");
             mascaraCep = new MaskFormatter("#####-###");
@@ -69,7 +69,7 @@ public class JDlgFuncionariosNovoIA extends javax.swing.JDialog {
         joafuncionario.setJoaPais(joa_jTxtPais.getText());
         joafuncionario.setJoaCep(joa_jFmtCep.getText());
         joafuncionario.setJoaEndereco(joa_jTxtEndereco.getText());
-        joafuncionario.setJoaSexo(joa_jCboSexo.getSelectedIndex());
+        joafuncionario.setJoaSexo(joa_jCboSexo1.getSelectedIndex());
         joafuncionario.setJoaCarteiraTrabalho(joa_jFmtCarteiraTrabalho.getText());
           if (joa_jChbAtivo.isSelected() == true) {
             joafuncionario.setJoaAtivo("S");
@@ -97,7 +97,7 @@ public class JDlgFuncionariosNovoIA extends javax.swing.JDialog {
         joa_jTxtPais.setText(funcionarios.getJoaPais());
         joa_jFmtCep.setText(funcionarios.getJoaCep());
         joa_jTxtEndereco.setText(funcionarios.getJoaEndereco());
-        joa_jCboSexo.setSelectedIndex(funcionarios.getJoaSexo());
+        joa_jCboSexo1.setSelectedIndex(funcionarios.getJoaSexo());
         joa_jFmtCarteiraTrabalho.setText(funcionarios.getJoaCarteiraTrabalho());
         if (joafuncionario.getJoaAtivo().equals("S") == true) {
             joa_jChbAtivo.setSelected(true);
@@ -119,7 +119,6 @@ public class JDlgFuncionariosNovoIA extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         joa_jTxtCidade = new javax.swing.JTextField();
-        joa_jCboSexo = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
         joa_jFmtDataNascimento = new javax.swing.JFormattedTextField();
         joa_jTxtPais = new javax.swing.JTextField();
@@ -149,6 +148,7 @@ public class JDlgFuncionariosNovoIA extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         joa_jBtnOk = new javax.swing.JButton();
         joa_jBtnCancelar = new javax.swing.JButton();
+        joa_jCboSexo1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -161,13 +161,6 @@ public class JDlgFuncionariosNovoIA extends javax.swing.JDialog {
         joa_jTxtCidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 joa_jTxtCidadeActionPerformed(evt);
-            }
-        });
-
-        joa_jCboSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Feminino", "Maculino", "Outro" }));
-        joa_jCboSexo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                joa_jCboSexoActionPerformed(evt);
             }
         });
 
@@ -280,11 +273,22 @@ public class JDlgFuncionariosNovoIA extends javax.swing.JDialog {
         });
         jPanel1.add(joa_jBtnCancelar);
 
+        joa_jCboSexo1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No sexo", "Feminino", "Masculino" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(joa_jTxtPais, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(184, 184, 184))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(joa_jCboSexo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(72, 72, 72))))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -313,7 +317,6 @@ public class JDlgFuncionariosNovoIA extends javax.swing.JDialog {
                             .addComponent(jLabel9)
                             .addComponent(jLabel10)
                             .addComponent(jLabel11)
-                            .addComponent(joa_jTxtPais)
                             .addComponent(joa_jTxtCidade)
                             .addComponent(joa_jTxtBairro)
                             .addComponent(joa_jFmtTelefone, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -321,10 +324,8 @@ public class JDlgFuncionariosNovoIA extends javax.swing.JDialog {
                     .addGap(42, 42, 42)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel5)
-                                .addComponent(joa_jCboSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(18, 18, Short.MAX_VALUE)
+                            .addComponent(jLabel5)
+                            .addGap(18, 65, Short.MAX_VALUE)
                             .addComponent(joa_jChbAtivo))
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -341,7 +342,11 @@ public class JDlgFuncionariosNovoIA extends javax.swing.JDialog {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 381, Short.MAX_VALUE)
+                .addGap(39, 39, 39)
+                .addComponent(joa_jCboSexo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 146, Short.MAX_VALUE)
+                .addComponent(joa_jTxtPais, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(151, 151, 151)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -357,8 +362,7 @@ public class JDlgFuncionariosNovoIA extends javax.swing.JDialog {
                             .addComponent(joa_jFmtCarteiraTrabalho, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel5)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(joa_jCboSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(26, 26, 26))
                         .addComponent(joa_jChbAtivo))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -391,9 +395,7 @@ public class JDlgFuncionariosNovoIA extends javax.swing.JDialog {
                                     .addGap(12, 12, 12)
                                     .addComponent(jLabel11)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(joa_jTxtPais, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(joa_jFmtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(joa_jFmtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel8)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -427,10 +429,6 @@ public class JDlgFuncionariosNovoIA extends javax.swing.JDialog {
     private void joa_jTxtCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jTxtCidadeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_joa_jTxtCidadeActionPerformed
-
-    private void joa_jCboSexoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jCboSexoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_joa_jCboSexoActionPerformed
 
     private void joa_jTxtPaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jTxtPaisActionPerformed
         // TODO add your handling code here:
@@ -480,14 +478,14 @@ public class JDlgFuncionariosNovoIA extends javax.swing.JDialog {
         joafuncionario = ViewBean();
 
         funcionariosDAO.insert(joafuncionario);
-        Util.limparCampos(joa_jTxtCodigo, joa_jTxtNome, joa_jFmtCpf, joa_jTxtEmail, joa_jFmtTelefone, joa_jFmtCelular, joa_jTxtEmailReserva, joa_jFmtDataNascimento, joa_jTxtBairro, joa_jTxtCidade, joa_jTxtPais, joa_jTxtEndereco, joa_jFmtCep, joa_jCboSexo, joa_jFmtCarteiraTrabalho);
+        Util.limparCampos(joa_jTxtCodigo, joa_jTxtNome, joa_jFmtCpf, joa_jTxtEmail, joa_jFmtTelefone, joa_jFmtCelular, joa_jTxtEmailReserva, joa_jFmtDataNascimento, joa_jTxtBairro, joa_jTxtCidade, joa_jTxtPais, joa_jTxtEndereco, joa_jFmtCep, joa_jCboSexo1, joa_jFmtCarteiraTrabalho);
         setVisible(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_joa_jBtnOkActionPerformed
 
     private void joa_jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jBtnCancelarActionPerformed
         setVisible(false);
-        Util.limparCampos(joa_jTxtCodigo, joa_jTxtNome, joa_jFmtCpf, joa_jTxtEmail, joa_jFmtTelefone, joa_jFmtCelular, joa_jTxtEmailReserva, joa_jFmtDataNascimento, joa_jTxtBairro, joa_jTxtCidade, joa_jTxtPais, joa_jTxtEndereco, joa_jFmtCep, joa_jCboSexo, joa_jFmtCarteiraTrabalho);
+        Util.limparCampos(joa_jTxtCodigo, joa_jTxtNome, joa_jFmtCpf, joa_jTxtEmail, joa_jFmtTelefone, joa_jFmtCelular, joa_jTxtEmailReserva, joa_jFmtDataNascimento, joa_jTxtBairro, joa_jTxtCidade, joa_jTxtPais, joa_jTxtEndereco, joa_jFmtCep, joa_jCboSexo1, joa_jFmtCarteiraTrabalho);
 
         // TODO add your handling code here:
     }//GEN-LAST:event_joa_jBtnCancelarActionPerformed
@@ -554,7 +552,7 @@ public class JDlgFuncionariosNovoIA extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton joa_jBtnCancelar;
     private javax.swing.JButton joa_jBtnOk;
-    private javax.swing.JComboBox<String> joa_jCboSexo;
+    private javax.swing.JComboBox<String> joa_jCboSexo1;
     private javax.swing.JCheckBox joa_jChbAtivo;
     private javax.swing.JFormattedTextField joa_jFmtCarteiraTrabalho;
     private javax.swing.JFormattedTextField joa_jFmtCelular;

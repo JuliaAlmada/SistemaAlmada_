@@ -14,11 +14,11 @@ import javax.swing.table.AbstractTableModel;
  * @author u49558987859
  */
 public class ClientesControle extends AbstractTableModel {
-
     private List lista;
-
-    public void setList(List lista) {
-        this.lista = lista;
+    public void setList(List lista){
+    this.lista = lista;
+    this.fireTableDataChanged();
+    
     }
 
     public JoaCliente getBean(int row) {
@@ -32,7 +32,7 @@ public class ClientesControle extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 15;
+        return 7;
     }
 
     @Override
@@ -58,7 +58,7 @@ public class ClientesControle extends AbstractTableModel {
         }
         if (columnIndex == 6) {
             return cliente.getJoaSexo();
-        }
+  /*      }
         if (columnIndex == 7) {
             return cliente.getJoaCelular();
         }
@@ -81,7 +81,7 @@ public class ClientesControle extends AbstractTableModel {
             return cliente.getJoaCep();
         }
         if (columnIndex == 14) {
-            return cliente.getJoaCartaoFidelidade();
+            return cliente.getJoaCartaoFidelidade();*/
         }
 
         return "";
@@ -110,7 +110,7 @@ public class ClientesControle extends AbstractTableModel {
         if (column == 6) {
             return "joa_sexo";
         }
-        if (column == 7 ) {
+       /* if (column == 7 ) {
             return "celular";
         }
         if (column == 8) {
@@ -134,7 +134,7 @@ public class ClientesControle extends AbstractTableModel {
       
         if (column == 14) {
             return "joa_cartaoFidelidade";
-        }
+        }*/
         return "";
     }
 }
