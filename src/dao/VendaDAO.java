@@ -66,7 +66,7 @@ public class VendaDAO extends DAO_Abstract {
     public List listData(Date data) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(JoaVenda.class);
-        criteria.add(Restrictions.ge("joaData", data));
+        criteria.add(Restrictions.eq("joaData", data));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;
@@ -75,7 +75,7 @@ public class VendaDAO extends DAO_Abstract {
     public List listValor(double valor) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(JoaVenda.class);
-        criteria.add(Restrictions.ge("joaValorVenda", valor));
+        criteria.add(Restrictions.gt("joaValorVenda", valor));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;
@@ -84,7 +84,7 @@ public class VendaDAO extends DAO_Abstract {
     public List listDataValor(double valor, Date data) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(JoaVenda.class);
-        criteria.add(Restrictions.ge("joaValorVenda", valor));
+        criteria.add(Restrictions.gt("joaValorVenda", valor));
         criteria.add(Restrictions.eq("joaData", data));
         List lista = criteria.list();
         session.getTransaction().commit();

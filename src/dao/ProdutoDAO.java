@@ -75,7 +75,7 @@ public class ProdutoDAO extends DAO_Abstract {
     public List listValor(double valor) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(JoaProduto.class);
-        criteria.add(Restrictions.eq("joaValorVenda", valor));
+        criteria.add(Restrictions.gt("joaValorVenda", valor));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;
@@ -84,7 +84,7 @@ public class ProdutoDAO extends DAO_Abstract {
     public List listNomeValor(double valor, String nome) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(JoaProduto.class);
-        criteria.add(Restrictions.eq("joaValorVenda", valor));
+        criteria.add(Restrictions.gt("joaValorVenda", valor));
         criteria.add(Restrictions.ilike("joaNome", nome, MatchMode.ANYWHERE));
         List lista = criteria.list();
         session.getTransaction().commit();
