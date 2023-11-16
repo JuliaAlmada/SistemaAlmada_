@@ -134,6 +134,16 @@ public class UsuariosDAO extends DAO_Abstract {
         session.getTransaction().commit();
         return lista;
     }
+   
+    public JoaUsuario login(String usuarios, String senha){
+    session.beginTransaction();
+    Criteria criteria = session.createCriteria(JoaUsuario.class);
+    criteria.add(Restrictions.eq("joaNome", usuarios));
+    criteria.add(Restrictions.eq("joaSenha", senha));
+    JoaUsuario usuarioAprovado = (JoaUsuario) criteria.uniqueResult();
+    session.getTransaction().commit();
+        return usuarioAprovado;
+    }
 
 /*public static void main (String[] args){
         UsuariosDAO usuariosDAO = new UsuariosDAO();

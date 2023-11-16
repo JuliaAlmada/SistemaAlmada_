@@ -48,12 +48,12 @@ public class JFrmLogin extends javax.swing.JFrame {
     private void initComponents() {
 
         jTxtSenhaLogin = new javax.swing.JTextField();
-        joa_jTxtLogin = new javax.swing.JTextField();
+        joa_jTxtUsuario = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         joa_jBtnEntrarLogin = new javax.swing.JButton();
         joa_jBtnCancelarLogin = new javax.swing.JButton();
-        joa_jPwfLogin = new javax.swing.JPasswordField();
+        joa_jPwfSenha = new javax.swing.JPasswordField();
         joa_jBtnSair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -90,8 +90,8 @@ public class JFrmLogin extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(85, 85, 85)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(joa_jPwfLogin)
-                    .addComponent(joa_jTxtLogin)
+                    .addComponent(joa_jPwfSenha)
+                    .addComponent(joa_jTxtUsuario)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -111,11 +111,11 @@ public class JFrmLogin extends javax.swing.JFrame {
                 .addGap(40, 40, 40)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(joa_jTxtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(joa_jTxtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addComponent(joa_jPwfLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(joa_jPwfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(joa_jBtnCancelarLogin)
@@ -129,29 +129,23 @@ public class JFrmLogin extends javax.swing.JFrame {
 
     private void joa_jBtnCancelarLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jBtnCancelarLoginActionPerformed
         // TODO add your handling code here:
-        joa_jTxtLogin.setText("");
-        joa_jPwfLogin.setText("");
+        joa_jTxtUsuario.setText("");
+        joa_jPwfSenha.setText("");
     }//GEN-LAST:event_joa_jBtnCancelarLoginActionPerformed
 
     private void joa_jBtnEntrarLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jBtnEntrarLoginActionPerformed
         // TODO add your handling code here:
-        String apelido = joa_jTxtLogin.getText();
-        String senha = new String(joa_jPwfLogin.getPassword());
-
+      String usuario = joa_jTxtUsuario.getText();
+        String senha = joa_jPwfSenha.getText();
         UsuariosDAO usuarios_DAO = new UsuariosDAO();
+        JoaUsuario usuariosLogin = usuarios_DAO.login(usuario, senha);
 
-        if (usuarios_DAO.Login(apelido, senha) != null) {
-            JOptionPane.showMessageDialog(null, "Usuário logado com sucesso!");
+        if (usuariosLogin != null) {
             JFrmPrincipal jFrmPrincipal = new JFrmPrincipal();
             jFrmPrincipal.setVisible(true);
-            tentativas = 0;
         } else {
-            tentativas++;
-            JOptionPane.showMessageDialog(null, "Username ou senha invalido(a) " + tentativas + "/3" + " tentativas");
-            if (tentativas >= 3) {
-                JOptionPane.showMessageDialog(null, "Limte de tentativas alcançado");
-                System.exit(0);
-            }
+            //System.out.println("O login ou senha estão incorretos");
+            Util.mensagem("O login ou senha estão incorretos :(");
         }
     }//GEN-LAST:event_joa_jBtnEntrarLoginActionPerformed
 
@@ -203,7 +197,7 @@ public class JFrmLogin extends javax.swing.JFrame {
     private javax.swing.JButton joa_jBtnCancelarLogin;
     private javax.swing.JButton joa_jBtnEntrarLogin;
     private javax.swing.JButton joa_jBtnSair;
-    private javax.swing.JPasswordField joa_jPwfLogin;
-    private javax.swing.JTextField joa_jTxtLogin;
+    private javax.swing.JPasswordField joa_jPwfSenha;
+    private javax.swing.JTextField joa_jTxtUsuario;
     // End of variables declaration//GEN-END:variables
 }

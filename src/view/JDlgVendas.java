@@ -77,14 +77,14 @@ public class JDlgVendas extends javax.swing.JDialog {
         joa_jFmtData.setText(formato.format(vendas.getJoaData()));
         joa_jTxtCodigo.setText(id);
         
-       int idcliente = vendas.getJoaCliente();
+      /* int idcliente = vendas.getJoaCliente();
         int idfuncionario = vendas.getJoaFuncionario();
         
         ClientesDAO clientes_DAO = new ClientesDAO();
         joa_jCboClientes.setSelectedItem(clientes_DAO.list(idcliente));
         
         FuncionarioDAO vendedores_DAO = new FuncionarioDAO();
-        joa_jCboVendedores.setSelectedItem(vendedores_DAO.list(idfuncionario));
+        joa_jCboVendedores.setSelectedItem(vendedores_DAO.list(idfuncionario));*/
         
         joa_jFmtTotal.setText(String.valueOf(vendas.getJoaTotal()));
         
