@@ -6,10 +6,16 @@
 package query;
 
 import dao.ClientesDAO;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
 import tools.Util;
 import view.ClientesControle;
+import view.JDlgClientes;
 
 /**
  *
@@ -20,18 +26,21 @@ public class JDlgConsultaClientes extends javax.swing.JDialog {
     /**
      * Creates new form JDlgConsultaClientes
      */
+        MaskFormatter mascaraData;
     ClientesControle clientesControle;
     ClientesDAO clientesDAO;
 
     public JDlgConsultaClientes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setTitle("Consulta de Clientes");
         setLocationRelativeTo(null);
         clientesControle = new ClientesControle();
        clientesDAO = new ClientesDAO();
         List lista = clientesDAO.listAll();
         clientesControle.setList(lista);
         jTable1.setModel(clientesControle);
+
     }
 
     /**
@@ -48,7 +57,8 @@ public class JDlgConsultaClientes extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         joa_jTxtConsultar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        joa_jFmtDataNascimento = new javax.swing.JFormattedTextField();
+        joa_jFmtData = new javax.swing.JFormattedTextField();
+        jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
@@ -67,6 +77,8 @@ public class JDlgConsultaClientes extends javax.swing.JDialog {
 
         jLabel2.setText("Data Nascimento");
 
+        jLabel4.setText("(IGUAL) =");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -75,12 +87,14 @@ public class JDlgConsultaClientes extends javax.swing.JDialog {
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(joa_jTxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(joa_jTxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(62, 62, 62)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(joa_jFmtDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(117, 117, 117)
+                        .addComponent(joa_jFmtData, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel4)
+                        .addGap(58, 58, 58)
                         .addComponent(joa_jTxtConsultar))
                     .addComponent(jLabel2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -92,8 +106,7 @@ public class JDlgConsultaClientes extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addComponent(joa_jTxtConsultar)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(joa_jTxtConsultar))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
@@ -101,8 +114,9 @@ public class JDlgConsultaClientes extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(joa_jTxtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(joa_jFmtDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 16, Short.MAX_VALUE))))
+                            .addComponent(joa_jFmtData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))))
+                .addGap(0, 13, Short.MAX_VALUE))
         );
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -138,12 +152,12 @@ public class JDlgConsultaClientes extends javax.swing.JDialog {
 
     private void joa_jTxtConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jTxtConsultarActionPerformed
         // TODO add your handling code here:
-          if (joa_jTxtNome.getText().equals("") && joa_jFmtDataNascimento.getText().equals("")) {
+          if (joa_jTxtNome.getText().equals("") && joa_jFmtData.getText().equals("")) {
             List lista = clientesDAO.listAll();
             clientesControle.setList(lista);
         } else {
-            if (!joa_jTxtNome.getText().equals("") && !joa_jFmtDataNascimento.getText().equals("")) {
-                Date data = Util.strDate(joa_jFmtDataNascimento.getText());
+            if (!joa_jTxtNome.getText().equals("") && !joa_jFmtData.getText().equals("")) {
+                Date data = Util.strDate(joa_jFmtData.getText());
                 List lista = clientesDAO.listNomeData(data, joa_jTxtNome.getText());
                 clientesControle.setList(lista);
             } else {
@@ -151,8 +165,8 @@ public class JDlgConsultaClientes extends javax.swing.JDialog {
                     List lista = clientesDAO.listNome(joa_jTxtNome.getText());
                     clientesControle.setList(lista);
                 } else {
-                    if (!joa_jFmtDataNascimento.getText().equals("")) {  
-                    Date data = Util.strDate(joa_jFmtDataNascimento.getText());
+                    if (!joa_jFmtData.getText().equals("")) {  
+                    Date data = Util.strDate(joa_jFmtData.getText());
                     List lista = clientesDAO.listData(data);
                     clientesControle.setList(lista);
                     }
@@ -206,10 +220,11 @@ public class JDlgConsultaClientes extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JFormattedTextField joa_jFmtDataNascimento;
+    private javax.swing.JFormattedTextField joa_jFmtData;
     private javax.swing.JButton joa_jTxtConsultar;
     private javax.swing.JTextField joa_jTxtNome;
     // End of variables declaration//GEN-END:variables

@@ -32,7 +32,7 @@ public class ProdutosControle extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 6;
+        return 5;
     }
 
     @Override
@@ -48,12 +48,9 @@ public class ProdutosControle extends AbstractTableModel {
             return produtos.getJoaDescricao();
         }
         if (columnIndex == 3) {
-            return produtos.getJoaValorCompra();
+            return produtos.getJoaValorUnitario();
         }
         if (columnIndex == 4) {
-            return produtos.getJoaValorVenda();
-        }
-        if (columnIndex == 5) {
             return produtos.getJoaCategoria();
         }
         return "";
@@ -71,12 +68,9 @@ public class ProdutosControle extends AbstractTableModel {
             return "joa_descricao";
         }
         if (column == 3) {
-            return "joa_valorCompra";
+            return "joa_valorUnitario";
         }
         if (column == 4) {
-            return "joa_valorVenda";
-        }
-        if (column == 5) {
             return "joa_categoria";
         }
         return "";

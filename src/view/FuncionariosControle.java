@@ -25,7 +25,21 @@ public class FuncionariosControle extends AbstractTableModel {
     public JoaFuncionario getBean(int row) {
         return (JoaFuncionario) lista.get(row);
     }
-
+       public void addBean(JoaFuncionario joaFuncionario) {
+            lista.add(joaFuncionario);
+            this.fireTableDataChanged();
+    }
+    
+    public void removeBean(int index) {
+            lista.remove(index);
+            this.fireTableDataChanged();
+    }
+    
+    public void updateBean(int index, JoaFuncionario joaFuncionario){
+        lista.set(index, joaFuncionario);
+        this.fireTableDataChanged();
+    }
+    
     @Override
     public int getRowCount() {
         return lista.size();

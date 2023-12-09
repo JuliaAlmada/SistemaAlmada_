@@ -27,20 +27,20 @@ public class ClientesDAO extends DAO_Abstract {
 
     @Override
     public void update(Object object) {
-        session.beginTransaction();
-        session.update(object);
-        session.getTransaction().commit();
+        session.getTransaction();
         session.flush();
         session.clear();
+        session.update(object);
+        session.beginTransaction().commit();
     }
 
     @Override
     public void delete(Object object) {
-        session.beginTransaction();
-        session.delete(object);
-        session.getTransaction().commit();
+        session.getTransaction();
         session.flush();
         session.clear();
+        session.delete(object);
+        session.beginTransaction().commit();
     }
 
     @Override
@@ -71,7 +71,8 @@ public class ClientesDAO extends DAO_Abstract {
         session.getTransaction().commit();
         return lista;
     }
-        public List listData(Date data) {
+
+    public List listData(Date data) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(JoaCliente.class);
         criteria.add(Restrictions.eq("joaDataNascimento", data));
@@ -79,7 +80,8 @@ public class ClientesDAO extends DAO_Abstract {
         session.getTransaction().commit();
         return lista;
     }
-     public List listNomeData(Date data, String nome) {
+
+    public List listNomeData(Date data, String nome) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(JoaCliente.class);
         criteria.add(Restrictions.eq("joaDataNascimento", data));

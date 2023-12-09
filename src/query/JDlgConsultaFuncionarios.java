@@ -6,10 +6,16 @@
 package query;
 
 import dao.FuncionarioDAO;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
 import tools.Util;
 import view.FuncionariosControle;
+import view.JDlgClientes;
 
 /**
  *
@@ -20,6 +26,7 @@ public class JDlgConsultaFuncionarios extends javax.swing.JDialog {
     /**
      * Creates new form JDlgConsultaFuncionarios
      */
+        MaskFormatter mascaraData;
     FuncionariosControle funcionariosControle;
     FuncionarioDAO funcionarioDAO;
 
@@ -27,11 +34,13 @@ public class JDlgConsultaFuncionarios extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        setTitle("Consulta de Funcionarios");
         funcionariosControle = new FuncionariosControle();
         funcionarioDAO = new FuncionarioDAO();
         List lista = funcionarioDAO.listAll();
         funcionariosControle.setList(lista);
         jTable1.setModel(funcionariosControle);
+
     }
 
     /**
@@ -54,7 +63,8 @@ public class JDlgConsultaFuncionarios extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         joa_jTxtConsultar1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        joa_jFmtDataNascimento = new javax.swing.JFormattedTextField();
+        joa_jFmtData = new javax.swing.JFormattedTextField();
+        jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
@@ -122,6 +132,8 @@ public class JDlgConsultaFuncionarios extends javax.swing.JDialog {
 
         jLabel4.setText("Data Nascimento");
 
+        jLabel5.setText("(IGUAL) =");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -137,7 +149,9 @@ public class JDlgConsultaFuncionarios extends javax.swing.JDialog {
                         .addComponent(jLabel4)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(joa_jFmtDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(joa_jFmtData, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(joa_jTxtConsultar1)))
                 .addContainerGap())
@@ -152,8 +166,9 @@ public class JDlgConsultaFuncionarios extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(joa_jTxtNome1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(joa_jFmtDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(joa_jTxtConsultar1)))
+                            .addComponent(joa_jFmtData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(joa_jTxtConsultar1)
+                            .addComponent(jLabel5)))
                     .addComponent(jLabel4))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
@@ -195,12 +210,12 @@ public class JDlgConsultaFuncionarios extends javax.swing.JDialog {
 
     private void joa_jTxtConsultar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jTxtConsultar1ActionPerformed
 
-         if (joa_jTxtNome1.getText().equals("") && joa_jFmtDataNascimento.getText().equals("")) {
+         if (joa_jTxtNome1.getText().equals("") && joa_jFmtData.getText().equals("")) {
             List lista = funcionarioDAO.listAll();
             funcionariosControle.setList(lista);
         } else {
-            if (!joa_jTxtNome1.getText().equals("") && !joa_jFmtDataNascimento.getText().equals("")) {
-                Date data = Util.strDate(joa_jFmtDataNascimento.getText());
+            if (!joa_jTxtNome1.getText().equals("") && !joa_jFmtData.getText().equals("")) {
+                Date data = Util.strDate(joa_jFmtData.getText());
                 List lista = funcionarioDAO.listNomeData(data, joa_jTxtNome1.getText());
                 funcionariosControle.setList(lista);
             } else {
@@ -208,8 +223,8 @@ public class JDlgConsultaFuncionarios extends javax.swing.JDialog {
                     List lista = funcionarioDAO.listNome(joa_jTxtNome1.getText());
                     funcionariosControle.setList(lista);
                 } else {
-                    if (!joa_jFmtDataNascimento.getText().equals("")) {  
-                    Date data = Util.strDate(joa_jFmtDataNascimento.getText());
+                    if (!joa_jFmtData.getText().equals("")) {  
+                    Date data = Util.strDate(joa_jFmtData.getText());
                     List lista = funcionarioDAO.listData(data);
                     funcionariosControle.setList(lista);
                     }
@@ -266,11 +281,12 @@ public class JDlgConsultaFuncionarios extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JFormattedTextField joa_jFmtDataNascimento;
+    private javax.swing.JFormattedTextField joa_jFmtData;
     private javax.swing.JButton joa_jTxtConsultar;
     private javax.swing.JButton joa_jTxtConsultar1;
     private javax.swing.JTextField joa_jTxtNome;

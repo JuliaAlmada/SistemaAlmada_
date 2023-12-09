@@ -75,7 +75,7 @@ public class Util {
        }
        
        public static Date strDate (String cad){
-        SimpleDateFormat formataNascimento = new SimpleDateFormat("yyyy/MM/dd"); //convertendo string para Date
+        SimpleDateFormat formataNascimento = new SimpleDateFormat("dd/MM/yyyy"); //convertendo string para Date
         try {
             return formataNascimento.parse(cad);
         } catch (ParseException ex) {
@@ -85,7 +85,7 @@ public class Util {
        }
        
        public static String Datestr (Date date){
-         SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
+         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         return formato.format(date);
        }
        

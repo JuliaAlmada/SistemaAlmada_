@@ -9,6 +9,8 @@ import bean.JoaProduto;
 import dao.ProdutoDAO;
 import java.util.List;
 import tools.Util;
+import view.JDlgFuncionariosNovoIA;
+import view.ProdutosControle;
 
 /**
  *
@@ -27,7 +29,7 @@ public class JDlgProdutoNovo extends javax.swing.JDialog {
     public JDlgProdutoNovo(java.awt.Frame parent, boolean modal) {
          super(parent, modal);
         initComponents();
-        setTitle("Cadastro de Usuários");
+        setTitle("Cadastro de Produtos");
         setLocationRelativeTo(null);
         
        jDlgProdutoNovoIA = new JDlgProdutoNovoIA(null, true);
@@ -128,7 +130,14 @@ public class JDlgProdutoNovo extends javax.swing.JDialog {
 
     private void joa_jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jBtnAlterarActionPerformed
         // TODO add your handling code here:
-      jDlgProdutoNovoIA.setTitle("Alteração");
+     jDlgProdutoNovoIA.setTitle("Alteração");
+      int sel = jTable1.getSelectedRow();
+      produto = produtoControle.getBean(sel);
+      jDlgProdutoNovoIA.beanView(produto);
+      
+       List lista = produtoDAO.listAll();
+          produtoControle.setList(lista);
+          
        jDlgProdutoNovoIA.setVisible(true);
     }//GEN-LAST:event_joa_jBtnAlterarActionPerformed
 

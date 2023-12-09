@@ -9,35 +9,31 @@ import bean.JoaVenda;
 import dao.VendaDAO;
 import java.util.List;
 
-
 /**
  *
  * @author User
  */
 public class JDlgPesquisaVendas extends javax.swing.JDialog {
-
     private JDlgVendas jDlgVendas;
-   // private VendasControle vendasControle;
-
+    private VendasControle vendasControle;
+    private VendaDAO vendaDAO;
     /**
-     * Creates new form JDlgPesquisaVendas_produtos
+     * Creates new form JDlgVendasPesquisa
      */
     public JDlgPesquisaVendas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-      //  vendasControle = new VendasControle();
-       // Vendas_DAO vendas_DAO = new Vendas_DAO();
-       // List lista = vendas_DAO.listAll();
-       // vendasControle.setList(lista);
-        //jTable1.setModel(vendasControle);
-        setTitle("Registro de Vendas");
+        vendasControle = new VendasControle();
+        vendaDAO = new VendaDAO();
+        List lista = vendaDAO.listAll();
+        vendasControle.setList(lista);
+        jTable1.setModel(vendasControle);
+        setTitle("Pequisa de Vendas");
         setLocationRelativeTo(null);
     }
-
-    public void setTelaAnterior(JDlgVendas jDlgVendas) {
+  public void setTelaAnterior(JDlgVendas jDlgVendas) {
         this.jDlgVendas = jDlgVendas;
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -47,84 +43,84 @@ public class JDlgPesquisaVendas extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
+        jBtnOk = new javax.swing.JButton();
+        jBtnCancelar = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        joa_jBtnCancelar = new javax.swing.JButton();
-        joa_jBtnOk = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jBtnOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ok.png"))); // NOI18N
+        jBtnOk.setText("OK");
+        jBtnOk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnOkActionPerformed(evt);
+            }
+        });
+
+        jBtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
+        jBtnCancelar.setText("CANCELAR");
+        jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCancelarActionPerformed(evt);
+            }
+        });
+
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "ID", "DATA", "VALOR", "CLIENTE", "VENDEDORES"
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
-
-        joa_jBtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
-        joa_jBtnCancelar.setText("CANCELAR");
-        joa_jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                joa_jBtnCancelarActionPerformed(evt);
-            }
-        });
-
-        joa_jBtnOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ok.png"))); // NOI18N
-        joa_jBtnOk.setText("OK");
-        joa_jBtnOk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                joa_jBtnOkActionPerformed(evt);
-            }
-        });
+        jScrollPane2.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 662, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(170, 170, 170)
+                .addComponent(jBtnOk)
+                .addGap(138, 138, 138)
+                .addComponent(jBtnCancelar)
+                .addContainerGap(178, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(joa_jBtnOk)
-                .addGap(50, 50, 50)
-                .addComponent(joa_jBtnCancelar)
-                .addGap(222, 222, 222))
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 662, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(joa_jBtnOk, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(joa_jBtnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(25, 25, 25))
+                    .addComponent(jBtnOk, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnCancelar))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void joa_jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jBtnCancelarActionPerformed
+    private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
         // TODO add your handling code here:
+        int  rowSel = jTable1.getSelectedRow();
+        JoaVenda joaVenda = vendasControle.getBean(rowSel);
+        jDlgVendas.beanView(joaVenda);
         setVisible(false);
-    }//GEN-LAST:event_joa_jBtnCancelarActionPerformed
+    }//GEN-LAST:event_jBtnOkActionPerformed
 
-    private void joa_jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jBtnOkActionPerformed
+    private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
         // TODO add your handling code here:
-        int rowSel = jTable1.getSelectedRow();
-       // Vendas vendas = vendasControle.getBean(rowSel);
-     //   jDlgVendas.beanView(joaVenda);
-        setVisible(false);
-    }//GEN-LAST:event_joa_jBtnOkActionPerformed
+        JDlgPesquisaVendas.this.dispose();
+    }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -170,9 +166,9 @@ public class JDlgPesquisaVendas extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jBtnCancelar;
+    private javax.swing.JButton jBtnOk;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JButton joa_jBtnCancelar;
-    private javax.swing.JButton joa_jBtnOk;
     // End of variables declaration//GEN-END:variables
 }

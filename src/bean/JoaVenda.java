@@ -59,7 +59,7 @@ public class JoaVenda  implements java.io.Serializable {
         this.idjoaVenda = idjoaVenda;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
+@ManyToOne(fetch=FetchType.EAGER)   
     @JoinColumn(name="joa_cliente", nullable=false)
     public JoaCliente getJoaCliente() {
         return this.joaCliente;
@@ -69,7 +69,7 @@ public class JoaVenda  implements java.io.Serializable {
         this.joaCliente = joaCliente;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
+@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="joa_funcionario", nullable=false)
     public JoaFuncionario getJoaFuncionario() {
         return this.joaFuncionario;
@@ -99,7 +99,19 @@ public class JoaVenda  implements java.io.Serializable {
         this.joaTotal = joaTotal;
     }
 
-
+    public int toInt(){
+    return this.getIdjoaVenda();
+    }
+    @Override
+    public boolean equals (Object object){
+    if(object instanceof JoaVenda){
+        JoaVenda joaVenda = (JoaVenda) object;
+    if(this.getIdjoaVenda()==joaVenda.getIdjoaVenda()){
+    return true;
+    } }
+    return false;
+}
+  
 
 }
 

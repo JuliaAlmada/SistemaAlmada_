@@ -9,6 +9,7 @@ import bean.JoaFuncionario;
 import dao.FuncionarioDAO;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.text.DefaultFormatterFactory;
@@ -24,6 +25,8 @@ public class JDlgFuncionariosNovoIA extends javax.swing.JDialog {
     MaskFormatter mascaraCPF, mascaraDataNascimento, mascaraCelular, mascaraTelefone, mascaraCep, mascaraCarteiraTrabalho;
     JoaFuncionario joafuncionario;
     FuncionarioDAO funcionariosDAO;
+    JDlgFuncionariosNovo jDlgFuncionariosNovo;
+    FuncionariosControle funcionariosControle;
 
     /**
      * Creates new form JDlgFuncionarios
@@ -31,12 +34,12 @@ public class JDlgFuncionariosNovoIA extends javax.swing.JDialog {
     public JDlgFuncionariosNovoIA(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        funcionariosDAO = new FuncionarioDAO();
-        setTitle("Cadastro de Funcionários");
         setLocationRelativeTo(null);
+        joafuncionario = new JoaFuncionario();
+        funcionariosControle = new FuncionariosControle();
         try {
             mascaraCPF = new MaskFormatter("###.###.###-##");
-            mascaraDataNascimento = new MaskFormatter("####/##/##");
+            mascaraDataNascimento = new MaskFormatter("##/##/####");
             mascaraCelular = new MaskFormatter("(##)#####-####");
             mascaraTelefone = new MaskFormatter("(##)#####-####");
             mascaraCep = new MaskFormatter("#####-###");
@@ -54,10 +57,8 @@ public class JDlgFuncionariosNovoIA extends javax.swing.JDialog {
     }
 
     public JoaFuncionario ViewBean() {
-        JoaFuncionario joafuncionario = new JoaFuncionario();
         joafuncionario.setIdjoaFuncionario(Util.strInt(joa_jTxtCodigo.getText()));
         joafuncionario.setJoaDataNascimento(Util.strDate(joa_jFmtDataNascimento.getText()));
-        //transforma para inteiro
         joafuncionario.setJoaNome(joa_jTxtNome.getText());
         joafuncionario.setJoaCpf(joa_jFmtCpf.getText());
         joafuncionario.setJoaEmail(joa_jTxtEmail.getText());
@@ -71,19 +72,21 @@ public class JDlgFuncionariosNovoIA extends javax.swing.JDialog {
         joafuncionario.setJoaEndereco(joa_jTxtEndereco.getText());
         joafuncionario.setJoaSexo(joa_jCboSexo1.getSelectedIndex());
         joafuncionario.setJoaCarteiraTrabalho(joa_jFmtCarteiraTrabalho.getText());
-          if (joa_jChbAtivo.isSelected() == true) {
+        if (joa_jChbAtivo.isSelected() == true) {
             joafuncionario.setJoaAtivo("S");
         } else {
             joafuncionario.setJoaAtivo("N");
         }
-  
 
         return joafuncionario;
     }
 
-    public void beanView(JoaFuncionario funcionarios) {
+    public void setTelaAnterior(JDlgFuncionariosNovo jDlgFuncionario) {
+        this.jDlgFuncionariosNovo = jDlgFuncionario;
 
-        //transforma inteiro para string
+    }
+
+    public void beanView(JoaFuncionario funcionarios) {
         joa_jTxtCodigo.setText(Util.intStr(funcionarios.getIdjoaFuncionario()));;
         joa_jTxtNome.setText(funcionarios.getJoaNome());
         joa_jFmtCpf.setText(funcionarios.getJoaCpf());
@@ -99,11 +102,12 @@ public class JDlgFuncionariosNovoIA extends javax.swing.JDialog {
         joa_jTxtEndereco.setText(funcionarios.getJoaEndereco());
         joa_jCboSexo1.setSelectedIndex(funcionarios.getJoaSexo());
         joa_jFmtCarteiraTrabalho.setText(funcionarios.getJoaCarteiraTrabalho());
-        if (joafuncionario.getJoaAtivo().equals("S") == true) {
+        if (funcionarios.getJoaAtivo().equals("S") == true) {
             joa_jChbAtivo.setSelected(true);
         } else {
             joa_jChbAtivo.setSelected(false);
         }
+
     }
 
     /**
@@ -279,16 +283,16 @@ public class JDlgFuncionariosNovoIA extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 634, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(joa_jTxtPais, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(184, 184, 184))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(joa_jCboSexo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(72, 72, 72))))
+                        .addGap(72, 72, 72))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(joa_jTxtPais, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(208, 208, 208))))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -325,7 +329,7 @@ public class JDlgFuncionariosNovoIA extends javax.swing.JDialog {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel5)
-                            .addGap(18, 65, Short.MAX_VALUE)
+                            .addGap(18, 89, Short.MAX_VALUE)
                             .addComponent(joa_jChbAtivo))
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -344,9 +348,9 @@ public class JDlgFuncionariosNovoIA extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addComponent(joa_jCboSexo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 146, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 155, Short.MAX_VALUE)
                 .addComponent(joa_jTxtPais, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(151, 151, 151)
+                .addGap(142, 142, 142)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -476,11 +480,15 @@ public class JDlgFuncionariosNovoIA extends javax.swing.JDialog {
 
     private void joa_jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jBtnOkActionPerformed
         joafuncionario = ViewBean();
-
-        funcionariosDAO.insert(joafuncionario);
-        Util.limparCampos(joa_jTxtCodigo, joa_jTxtNome, joa_jFmtCpf, joa_jTxtEmail, joa_jFmtTelefone, joa_jFmtCelular, joa_jTxtEmailReserva, joa_jFmtDataNascimento, joa_jTxtBairro, joa_jTxtCidade, joa_jTxtPais, joa_jTxtEndereco, joa_jFmtCep, joa_jCboSexo1, joa_jFmtCarteiraTrabalho);
+        funcionariosDAO = new FuncionarioDAO();
+        if (getTitle().toUpperCase().substring(0, 1).equals("I")) {
+            funcionariosDAO.insert(joafuncionario);
+        } else {
+            funcionariosDAO.update(joafuncionario);
+        }
+        Util.limparCampos(joa_jTxtCodigo, joa_jTxtNome, joa_jFmtCpf, joa_jTxtEmail, joa_jFmtTelefone, joa_jFmtCelular, joa_jTxtEmailReserva, joa_jFmtDataNascimento, joa_jTxtBairro, joa_jTxtCidade, joa_jTxtPais, joa_jTxtEndereco, joa_jFmtCep, joa_jCboSexo1, joa_jFmtCarteiraTrabalho); 
         setVisible(false);
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_joa_jBtnOkActionPerformed
 
     private void joa_jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jBtnCancelarActionPerformed

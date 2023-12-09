@@ -145,7 +145,9 @@
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
-                          <Component id="joa_jFmtDataNascimento" min="-2" pref="146" max="-2" attributes="0"/>
+                          <Component id="joa_jFmtData" min="-2" pref="146" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="joa_jTxtConsultar1" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -164,8 +166,9 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="joa_jTxtNome1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="joa_jFmtDataNascimento" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="joa_jFmtData" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="joa_jTxtConsultar1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
@@ -196,7 +199,12 @@
             <Property name="text" type="java.lang.String" value="Data Nascimento"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="joa_jFmtDataNascimento">
+        <Component class="javax.swing.JFormattedTextField" name="joa_jFmtData">
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel5">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="(IGUAL) ="/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

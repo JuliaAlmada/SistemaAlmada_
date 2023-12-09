@@ -25,20 +25,18 @@ public class JoaProduto  implements java.io.Serializable {
      private int idjoaProduto;
      private String joaNome;
      private String joaDescricao;
-     private double joaValorCompra;
-     private double joaValorVenda;
+     private double joaValorUnitario;
      private int joaCategoria;
 
     public JoaProduto() {
     }
 
 	
-    public JoaProduto(int idjoaProduto, String joaNome, String joaDescricao, double joaValorCompra, double joaValorVenda, int joaCategoria) {
+    public JoaProduto(int idjoaProduto, String joaNome, String joaDescricao, double joaValorUnitario, int joaCategoria) {
         this.idjoaProduto = idjoaProduto;
         this.joaNome = joaNome;
         this.joaDescricao = joaDescricao;
-        this.joaValorCompra = joaValorCompra;
-        this.joaValorVenda = joaValorVenda;
+        this.joaValorUnitario = joaValorUnitario;
         this.joaCategoria = joaCategoria;
     }
  
@@ -74,24 +72,15 @@ public class JoaProduto  implements java.io.Serializable {
         this.joaDescricao = joaDescricao;
     }
 
-    
-    @Column(name="joa_valorCompra", nullable=false, precision=10)
-    public double getJoaValorCompra() {
-        return this.joaValorCompra;
-    }
-    
-    public void setJoaValorCompra(double joaValorCompra) {
-        this.joaValorCompra = joaValorCompra;
-    }
 
     
-    @Column(name="joa_valorVenda", nullable=false, precision=10)
-    public double getJoaValorVenda() {
-        return this.joaValorVenda;
+    @Column(name="joa_valorUnitario", nullable=false, precision=10)
+    public double getJoaValorUnitario() {
+        return this.joaValorUnitario;
     }
     
-    public void setJoaValorVenda(double joaValorVenda) {
-        this.joaValorVenda = joaValorVenda;
+    public void setJoaValorUnitario(double joaValorUnitario) {
+        this.joaValorUnitario = joaValorUnitario;
     }
 
     
@@ -104,7 +93,20 @@ public class JoaProduto  implements java.io.Serializable {
         this.joaCategoria = joaCategoria;
     }
 
-
+@Override
+    public String toString(){
+    return this.getJoaNome();
+    }
+    @Override
+    public boolean equals (Object object){
+    if(object instanceof JoaProduto){
+        JoaProduto joaProduto = (JoaProduto) object;
+    if(this.getIdjoaProduto()==joaProduto.getIdjoaProduto()){
+    return true;
+    } }
+    return false;
+}
+ 
 
 }
 

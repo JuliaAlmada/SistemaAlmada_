@@ -244,6 +244,7 @@ public class JoaCliente  implements java.io.Serializable {
     return this.getJoaNome();
     }
     
+     @Override
     public boolean equals (Object object){
     if(object instanceof JoaCliente){
         JoaCliente joaCliente = (JoaCliente) object;

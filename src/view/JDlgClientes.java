@@ -56,7 +56,7 @@ public class JDlgClientes extends javax.swing.JDialog {
         joa_jFmtTelefone.setFormatterFactory(new DefaultFormatterFactory(mascaraTelefone));
         joa_jFmtCep.setFormatterFactory(new DefaultFormatterFactory(mascaraCep));
     }
-        public JoaCliente ViewBean() {
+        public JoaCliente viewBean() {
         JoaCliente clientes = new JoaCliente();
         
         clientes.setIdjoaCliente(Util.strInt(joa_jTxtCodigo1.getText()));
@@ -435,11 +435,18 @@ public class JDlgClientes extends javax.swing.JDialog {
                 joa_jTxtPais, joa_jTxtEndereco, joa_jFmtCelular, joa_jFmtCep, joa_jFmtCpf,
                 joa_jFmtCartaoFidelidade, joa_jFmtDataN, joa_jFmtTelefone, joa_jCboSexo,
                 joa_jChbAtivo,  joa_jBtnConfirmar, joa_jBtnCancelar);
-        incluindo=false;
+                Util.habilitar(false,joa_jBtnIncluir, joa_jBtnAlterar, joa_jBtnExcluir, joa_jBtnPesquisar);
+                incluindo=false;
     }//GEN-LAST:event_joa_jBtnAlterarActionPerformed
 
     private void joa_jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jBtnExcluirActionPerformed
-        if (Util.perguntar("Deseja excluir o usuario?") == true) {
+        if (Util.perguntar("Deseja excluir o registro?") == true){
+           joaClientes = viewBean();
+           clientesDAO.delete(joaClientes);
+       }
+       else {
+        
+            Util.mensagem("Exclusão cancelada");
         }        // TODO add your handling code here
         Util.limparCampos(joa_jTxtCodigo1,joa_jTxtNome,
                 joa_jTxtEmail, joa_jTxtEmailRes, joa_jTxtCidade, joa_jTxtBairro,
@@ -476,7 +483,7 @@ public class JDlgClientes extends javax.swing.JDialog {
     }//GEN-LAST:event_joa_jBtnPesquisarActionPerformed
 
     private void joa_jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_joa_jBtnConfirmarActionPerformed
-         joaClientes=ViewBean();
+         joaClientes=viewBean();
         if (incluindo ==true ){
         clientesDAO.insert(joaClientes);}
         else{

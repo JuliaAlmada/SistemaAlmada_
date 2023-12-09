@@ -217,7 +217,7 @@ public class JoaFuncionario implements java.io.Serializable {
         this.joaCelular = joaCelular;
     }
 
-    @Column(name = "joa_ativo", length = 1)
+    @Column(name = "joa_ativo", nullable = false, length = 1)
     public String getJoaAtivo() {
         return this.joaAtivo;
     }
@@ -226,5 +226,18 @@ public class JoaFuncionario implements java.io.Serializable {
         this.joaAtivo = joaAtivo;
 
     }
-
+ @Override
+    public String toString(){
+    return this.getJoaNome();
+    }
+    @Override
+    public boolean equals (Object object){
+    if(object instanceof JoaFuncionario){
+        JoaFuncionario joaFuncionario = (JoaFuncionario) object;
+    if(this.getIdjoaFuncionario()==joaFuncionario.getIdjoaFuncionario()){
+    return true;
+    } }
+    return false;
+}
+ 
 }

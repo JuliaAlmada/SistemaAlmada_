@@ -28,20 +28,20 @@ public class ProdutoDAO extends DAO_Abstract {
 
     @Override
     public void update(Object object) {
-        session.beginTransaction();
-        session.update(object);
-        session.getTransaction().commit();
+        session.getTransaction();
         session.flush();
         session.clear();
+        session.update(object);
+        session.beginTransaction().commit();
     }
 
     @Override
     public void delete(Object object) {
-        session.beginTransaction();
-        session.delete(object);
-        session.getTransaction().commit();
+        session.getTransaction();
         session.flush();
         session.clear();
+        session.delete(object);
+        session.beginTransaction().commit();
     }
 
     @Override
@@ -75,7 +75,7 @@ public class ProdutoDAO extends DAO_Abstract {
     public List listValor(double valor) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(JoaProduto.class);
-        criteria.add(Restrictions.gt("joaValorVenda", valor));
+        criteria.add(Restrictions.ge("joaValorUnitario", valor));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;
@@ -84,7 +84,7 @@ public class ProdutoDAO extends DAO_Abstract {
     public List listNomeValor(double valor, String nome) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(JoaProduto.class);
-        criteria.add(Restrictions.gt("joaValorVenda", valor));
+        criteria.add(Restrictions.ge("joaValorUnitario", valor));
         criteria.add(Restrictions.ilike("joaNome", nome, MatchMode.ANYWHERE));
         List lista = criteria.list();
         session.getTransaction().commit();

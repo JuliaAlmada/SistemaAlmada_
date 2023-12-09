@@ -5,7 +5,7 @@
  */
 package view;
 
-import bean.JoaVenda;
+import bean.JoaVendaProduto;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -13,15 +13,31 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author u49558987859
  */
-public class VendasControle extends AbstractTableModel{
+public class VendasProdutoControle extends AbstractTableModel{
     private List lista;
     public void setList(List lista){
     this.lista = lista;
-     this.fireTableDataChanged();
+    this.fireTableDataChanged();
+
     }
 
-    public JoaVenda getBean (int row){
-    return (JoaVenda) lista.get(row);
+    public JoaVendaProduto getBean (int row){
+    return (JoaVendaProduto) lista.get(row);
+    }
+    
+    public  void  addBean (JoaVendaProduto joaVendaProduto){
+    lista.add(joaVendaProduto);
+    this.fireTableDataChanged();
+    }
+    
+    public void removeBean (int index){
+    lista.remove(index);
+    this.fireTableDataChanged();
+    }
+    
+    public  void  updateBean (int index, JoaVendaProduto joaVendaProduto){
+    lista.set(index, joaVendaProduto);
+    this.fireTableDataChanged();
     }
     
     @Override
@@ -31,26 +47,23 @@ public class VendasControle extends AbstractTableModel{
 
     @Override
     public int getColumnCount() {
-        return 5;
+        return 4;
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        JoaVenda vendas =(JoaVenda) lista.get(rowIndex);
+        JoaVendaProduto vendas =(JoaVendaProduto) lista.get(rowIndex);
          if (columnIndex == 0 ) {
-            return vendas.getIdjoaVenda();
+            return vendas.getIdjoaVendaProduto();
         }
         if (columnIndex == 1 ) {
-            return vendas.getJoaData();
+            return vendas.getJoaProduto();
         }
         if (columnIndex == 2 ) {
-            return vendas.getJoaTotal();
+            return vendas.getJoaQuantidade();
         }
         if (columnIndex == 3 ) {
-            return vendas.getJoaCliente();
-        }
-        if (columnIndex == 4 ) {
-            return vendas.getJoaFuncionario();
+            return vendas.getJoaValor();
         }
          return "";
     }
@@ -60,16 +73,13 @@ public class VendasControle extends AbstractTableModel{
             return "id";
         }
         if (column == 1 ) {
-            return "data";
+            return "produto";
         }
         if (column == 2 ) {
-            return "valor";
+            return "quantidade";
         }
         if (column == 3 ) {
-            return "cliente";
-        }
-        if (column == 4 ) {
-            return "vendedores";
+            return "Valor";
         }
         return "";
     }

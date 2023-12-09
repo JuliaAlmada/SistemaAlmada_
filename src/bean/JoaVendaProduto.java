@@ -6,6 +6,8 @@ import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -25,21 +27,20 @@ public class JoaVendaProduto  implements java.io.Serializable {
      private JoaProduto joaProduto;
      private JoaVenda joaVenda;
      private String joaQuantidade;
-     private double joaValorUnitario;
+     private double joaValor;
 
     public JoaVendaProduto() {
     }
 
-    public JoaVendaProduto(int idjoaVendaProduto, JoaProduto joaProduto, JoaVenda joaVenda, String joaQuantidade, double joaValorUnitario) {
+    public JoaVendaProduto(int idjoaVendaProduto, JoaProduto joaProduto, JoaVenda joaVenda, String joaQuantidade, double joaValor) {
        this.idjoaVendaProduto = idjoaVendaProduto;
        this.joaProduto = joaProduto;
        this.joaVenda = joaVenda;
        this.joaQuantidade = joaQuantidade;
-       this.joaValorUnitario = joaValorUnitario;
+       this.joaValor = joaValor;
     }
    
-     @Id 
-
+    @Id @GeneratedValue(strategy=IDENTITY)
     
     @Column(name="idjoa_venda_produto", unique=true, nullable=false)
     public int getIdjoaVendaProduto() {
@@ -50,7 +51,7 @@ public class JoaVendaProduto  implements java.io.Serializable {
         this.idjoaVendaProduto = idjoaVendaProduto;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
+@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="joa_produto", nullable=false)
     public JoaProduto getJoaProduto() {
         return this.joaProduto;
@@ -60,7 +61,7 @@ public class JoaVendaProduto  implements java.io.Serializable {
         this.joaProduto = joaProduto;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
+@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="joa_venda", nullable=false)
     public JoaVenda getJoaVenda() {
         return this.joaVenda;
@@ -81,13 +82,13 @@ public class JoaVendaProduto  implements java.io.Serializable {
     }
 
     
-    @Column(name="joa_valorUnitario", nullable=false, precision=10)
-    public double getJoaValorUnitario() {
-        return this.joaValorUnitario;
+    @Column(name="joa_valor", nullable=false, precision=10)
+    public double getJoaValor() {
+        return this.joaValor;
     }
     
-    public void setJoaValorUnitario(double joaValorUnitario) {
-        this.joaValorUnitario = joaValorUnitario;
+    public void setJoaValor(double joaValor) {
+        this.joaValor = joaValor;
     }
 
 

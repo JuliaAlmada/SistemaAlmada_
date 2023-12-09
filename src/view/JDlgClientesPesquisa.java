@@ -8,7 +8,7 @@ package view;
 import dao.ClientesDAO;
 import bean.JoaCliente;
 import java.util.List;
-import view.JDlgClientes;
+
 
 /**
  *
@@ -31,7 +31,7 @@ public class JDlgClientesPesquisa extends javax.swing.JDialog {
         List lista = clientesDAO.listAll();
         clientesControle.setList(lista);
         jTable1.setModel(clientesControle);
-        setTitle("Registro de Clientes");
+        setTitle("Pesquisa Clientes");
         setLocationRelativeTo(null);
     }
 
@@ -95,13 +95,13 @@ public class JDlgClientesPesquisa extends javax.swing.JDialog {
                 .addGap(138, 138, 138)
                 .addComponent(jBtnCancelar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 793, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 791, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnOk, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtnCancelar))
