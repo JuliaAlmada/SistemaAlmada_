@@ -1,6 +1,4 @@
-Este é um projeto em Java que eu fiz no meu ultimo ano de Ensino médio integrado com Informática
-
-Sistema de Venda de Jogos com Controle de Estoque:
+#Sistema de Venda de Jogos com Controle de Estoque:
 Este projeto foi desenvolvido como parte do meu último ano no Ensino Médio integrado com Informática. O sistema tem como objetivo gerenciar a venda de jogos, 
 com um foco específico no controle de estoque. Ele foi criado para facilitar o processo de cadastro, venda e controle de jogos em estoque, proporcionando uma 
 experiência simples e eficiente tanto para os administradores quanto para os vendedores.
